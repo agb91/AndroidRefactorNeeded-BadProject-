@@ -1318,7 +1318,7 @@ public static final int google_maps_api_key1=0x7f040001;
       super.onCreate(savedInstanceState);
 	   requestWindowFeature(Window.FEATURE_NO_TITLE);
       setContentView(R.layout.loading);
-      
+
       ottenuteserie = new Vector<Attrazioni>();
 	   cambio = 0;
 
@@ -1532,7 +1532,7 @@ public static final int google_maps_api_key1=0x7f040001;
      // bearingFrameLayout.invalidate();
    } 
    
-   
+
    
    private OnClickListener takePictureButtonListener =
 		      new OnClickListener()
@@ -1631,7 +1631,8 @@ public static final int google_maps_api_key1=0x7f040001;
              scatto.setOnClickListener(scattoSoloPerTest);
 			 scatto.performClick();
 			 scatto.setBackgroundResource(R.drawable.founded);
-			 ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
+
+			  ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
 			 pb.setVisibility(View.INVISIBLE);
 		  }
        // bearingFrameLayout.invalidate();

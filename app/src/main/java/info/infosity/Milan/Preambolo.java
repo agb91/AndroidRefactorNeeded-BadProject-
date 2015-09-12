@@ -73,7 +73,18 @@ public class Preambolo extends Activity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), RouteTracker.class);
-            startActivity(intent);
+           try {
+               startActivity(intent);
+           }
+           catch(Exception e)
+           {
+                AlertDialog.Builder dialogBuilder3 =
+                        new AlertDialog.Builder(Preambolo.this);
+                dialogBuilder3.setTitle(e.getMessage());
+                dialogBuilder3.setPositiveButton(
+                        R.string.button_ok, null);
+                dialogBuilder3.show();
+           }
         }
     };
 
