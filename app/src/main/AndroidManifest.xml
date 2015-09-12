@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="info.infosity.Milan" >
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:allowBackup="true"
+        android:theme="@style/AppTheme"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name">
+
+        <activity
+            android:name="info.infosity.Milan.Preambolo"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.Seen"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.Info"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.Vids"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.Atr"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.AtrSeen"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="info.infosity.Milan.ATR"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="info.infosity.Milan.RouteTracker"
+            android:label="@string/app_name" >
+        </activity>
+
+    </application>
+
+
+</manifest>

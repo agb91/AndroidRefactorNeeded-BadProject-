@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Infosity: Milan</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="scattare">scattare</string>
+    <string name="simulScatta">simulScatta</string>
+    <string name="indietro">indietro</string>
+    <string name="button_ok">OK</string>
+    <string name="menu_settings">Settings</string>
+    <string name="Fragment1">This is Fragment 1</string>
+    <string name="Fragment2">This is Fragment 2</string>
+    <string name="Fragment3">This is Fragment 3</string>
+
+    <string name="title_activity_preambolo">Preambolo</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
