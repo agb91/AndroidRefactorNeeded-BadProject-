@@ -1,107 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:scrollbars="none"
-android:layout_weight="1"
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:background="@drawable/stemma"> 
-<TableLayout
-	android:id="@+id/widget33"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	>
+	<!--
+	android:background="@drawable/stemma"
+	android:scrollbars="none"
+	android:layout_weight="1"-->
 
-    
-<Button
-    android:id="@+id/nome1"
-    android:layout_width="wrap_content"
-    android:layout_height="90dp"
-    android:background="@drawable/tastoseconda"
-    android:text="Button"
-    android:visibility="invisible" />
 
-<Button
-	android:id="@+id/nome2"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-    android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
 
-<Button
-	android:id="@+id/nome3"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-    android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+	<TableLayout
+		android:id="@+id/widget33"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		>
 
-<Button
-	android:id="@+id/nome4"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-    android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
 
-<Button
-	android:id="@+id/nome5"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-    android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+		<Button
+			android:id="@+id/nome1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 
-<Button
-	android:id="@+id/nome6"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-	android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+			android:text="Button"
+			android:visibility="invisible" />
+		<!---->
 
-<Button
-	android:id="@+id/nome7"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-	android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+		<Button
+			android:id="@+id/nome2"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
 
-<Button
-	android:id="@+id/nome8"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-	android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+		<Button
+			android:id="@+id/nome3"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
 
-<Button
-	android:id="@+id/nome9"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-	android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+		<Button
+			android:id="@+id/nome4"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
 
-<Button
-	android:id="@+id/nome10"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Button" 
-	android:visibility="invisible" 
-    android:background="@drawable/tastoseconda"/>
+		<Button
+			android:id="@+id/nome5"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
 
-<Button
-	android:id="@+id/ritorno"
-	android:layout_width="wrap_content"
-	android:layout_height="90dp"
-	android:text="Indietro"
-	android:visibility="invisible" />
+		<Button
+			android:id="@+id/nome6"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
 
-</TableLayout>
+		<Button
+			android:id="@+id/nome7"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
+
+		<Button
+			android:id="@+id/nome8"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
+
+		<Button
+			android:id="@+id/nome9"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
+
+		<Button
+			android:id="@+id/nome10"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Button"
+			android:visibility="invisible"
+			/>
+
+		<Button
+			android:id="@+id/ritorno"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="Indietro"
+			android:visibility="invisible" />
+
+	</TableLayout>
 
 </ScrollView>
 

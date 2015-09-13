@@ -355,7 +355,7 @@ public class Vids extends Activity {
 
 		dbHelper.close();
 	}
-	
+
 	private OnClickListener toccato =
 		      new OnClickListener()
 		      {
