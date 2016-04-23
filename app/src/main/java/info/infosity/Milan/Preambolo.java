@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.*;
 import android.app.AlertDialog;
 
+import info.infosity.Milan.generalDBHelper.GodOfDb;
+
 
 public class Preambolo extends Activity {
 
@@ -29,7 +31,8 @@ public class Preambolo extends Activity {
         setContentView(R.layout.menu20);
 
 
-        serie = appoggio.getSerie();
+        GodOfDb god = new GodOfDb();
+        serie = god.getSerie();
 
         search = (ImageButton) findViewById(R.id.imageButton2);
         search.setOnClickListener(cliccasearch);
