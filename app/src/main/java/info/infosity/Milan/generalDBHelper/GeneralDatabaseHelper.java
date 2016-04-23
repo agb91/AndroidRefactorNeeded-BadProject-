@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "mydatabase.db";
+    private static final String DATABASE_NAME = "mydatabaseGeberal.db";
     private static final int DATABASE_VERSION = 1;
 
     // Lo statement SQL di creazione del database
@@ -19,8 +19,8 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             " gen text not null, " +
             " desc text not null, " +
             " tec text not null, " +
-            " latitude real not null) "+
-            " longitude real not null) "+
+            " latitude real not null, "+
+            " longitude real not null, "+
             " distance real not null);";
 
     // Costruttore

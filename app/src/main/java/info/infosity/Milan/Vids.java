@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.app.Activity;
 import android.content.Intent;
 
+import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
+
 public class Vids extends Activity {
-	
+
 	private Button bottone1;
 	private Button bottone2;
 	private Button bottone3;
@@ -25,14 +27,14 @@ public class Vids extends Activity {
 	private Button bottone9;
 	private Button bottone10;
 
-	private DbAdapter dbHelper;
+	private GeneralDbAdapter dbHelper;
 	private Cursor cursor;
-	
+
 //	private Button indietro;
-	
+
 	public static String nomeattrazione;
-	public static int numVettoreAttrazione; 
-	
+	public static int numVettoreAttrazione;
+
     public void onCreate(Bundle savedInstanceState){
 
 		super.onCreate(savedInstanceState);
@@ -40,10 +42,10 @@ public class Vids extends Activity {
 
 
 	//	indietro = (Button) findViewById(R.id.ritorno);
-		
+
 	//	indietro.setOnClickListener(toccato);
 
-		
+
 		String parola = String.valueOf(RouteTracker.cont);
 
 		if(parola.equals("0"))
@@ -73,7 +75,7 @@ public class Vids extends Activity {
 			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
 			bottone1.setVisibility(View.VISIBLE);
 	    }
-		
+
 		if(parola.equals("2"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -84,9 +86,9 @@ public class Vids extends Activity {
 			bottone2.setOnClickListener(secondo);
 			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
 			bottone2.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 		if(parola.equals("3"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -101,9 +103,9 @@ public class Vids extends Activity {
 			bottone3.setOnClickListener(terzo);
 			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
 			bottone3.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 		if(parola.equals("4"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -122,9 +124,9 @@ public class Vids extends Activity {
 			bottone4.setOnClickListener(quarto);
 			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
 			bottone4.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 		if(parola.equals("5"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -147,9 +149,9 @@ public class Vids extends Activity {
 			bottone5.setOnClickListener(quinto);
 			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
 			bottone5.setVisibility(View.VISIBLE);
-			
+
 		}
-		
+
 		if(parola.equals("6"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -176,9 +178,9 @@ public class Vids extends Activity {
 			bottone6.setOnClickListener(sesto);
 			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
 			bottone6.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 		if(parola.equals("7"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -209,9 +211,9 @@ public class Vids extends Activity {
 			bottone7.setOnClickListener(settimo);
 			bottone7.setText(RouteTracker.ottenuteserie.get(6).getNome());
 			bottone7.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 		if(parola.equals("8"))
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -246,9 +248,9 @@ public class Vids extends Activity {
 			bottone8.setOnClickListener(ottavo);
 			bottone8.setText(RouteTracker.ottenuteserie.get(7).getNome());
 			bottone8.setVisibility(View.VISIBLE);
-			
+
 	    }
-		
+
 
 
 		if(parola.equals("9"))
@@ -289,10 +291,10 @@ public class Vids extends Activity {
 			bottone9.setOnClickListener(nono);
 			bottone9.setText(RouteTracker.ottenuteserie.get(8).getNome());
 			bottone9.setVisibility(View.VISIBLE);
-	
-			
+
+
 	    }
-		
+
 		if(parola.equals("10")|| Double.valueOf(parola)>=11)
 		{
 			bottone1=(Button) findViewById(R.id.nome1);
@@ -335,23 +337,23 @@ public class Vids extends Activity {
 			bottone10.setOnClickListener(decimo);
 			bottone10.setText(RouteTracker.ottenuteserie.get(9).getNome());
 			bottone10.setVisibility(View.VISIBLE);
-		
-			
+
+
 	    }
-	
+
 
 	}
 
 	private void scrivi(Attrazioni a)
 	{
-		dbHelper = new DbAdapter(this);
+		dbHelper = new GeneralDbAdapter(this);
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
 		//  Calendar c = Calendar.getInstance();
 		// int seconds = c.get(Calendar.SECOND);
 
-		dbHelper.createContact(a.getNome(), now.toString());
+		//dbHelper.createContact(a.getNome(), now.toString(),null,null,null,null,null,null);
 
 		dbHelper.close();
 	}
@@ -367,7 +369,7 @@ public class Vids extends Activity {
 		            startActivity(intent);
 		         } // end method onClick
 		      };
-		      
+
 	private OnClickListener primo =
 			new OnClickListener()
 				{
@@ -381,7 +383,7 @@ public class Vids extends Activity {
 				       startActivity(intent);
 				     } // end method onClick
 				 };
-				 
+
 	private OnClickListener secondo =
 			new OnClickListener()
 				{
@@ -395,7 +397,7 @@ public class Vids extends Activity {
 							startActivity(intent);
 						} // end method onClick
 					};
-					
+
 		private OnClickListener terzo =
 				new OnClickListener()
 					{
@@ -406,11 +408,11 @@ public class Vids extends Activity {
 								nomeattrazione=RouteTracker.ottenuteserie.get(2).getNome();
 								numVettoreAttrazione=2;
 								Intent intent = new Intent(getApplicationContext(), Atr.class);
-									
+
 										startActivity(intent);
 							} // end method onClick
-					};				
-		      
+					};
+
 
 		private OnClickListener quarto =
 				new OnClickListener()
@@ -424,8 +426,8 @@ public class Vids extends Activity {
 									Intent intent = new Intent(getApplicationContext(), Atr.class);
 									startActivity(intent);
 							} // end method onClick
-					};	
-	
+					};
+
 		private OnClickListener quinto =
 				new OnClickListener()
 					{
@@ -439,9 +441,9 @@ public class Vids extends Activity {
 								Intent intent = new Intent(getApplicationContext(), Atr.class);
 								startActivity(intent);
 							} // end method onClick
-					};	
-	
-					
+					};
+
+
 		private OnClickListener sesto =
 				new OnClickListener()
 					{
@@ -455,8 +457,8 @@ public class Vids extends Activity {
 									Intent intent = new Intent(getApplicationContext(), Atr.class);
 									startActivity(intent);
 							} // end method onClick
-					};	
-					
+					};
+
 		private OnClickListener settimo =
 				new OnClickListener()
 					{
@@ -470,8 +472,8 @@ public class Vids extends Activity {
 									Intent intent = new Intent(getApplicationContext(), Atr.class);
 									startActivity(intent);
 							} // end method onClick
-					};	
-					
+					};
+
 		private OnClickListener ottavo =
 				new OnClickListener()
 					{
@@ -485,8 +487,8 @@ public class Vids extends Activity {
 									Intent intent = new Intent(getApplicationContext(), Atr.class);
 									startActivity(intent);
 							} // end method onClick
-					};	
-					
+					};
+
 		private OnClickListener nono =
 				new OnClickListener()
 					{
@@ -501,7 +503,7 @@ public class Vids extends Activity {
 									startActivity(intent);
 						} // end method onClick
 					};
-					
+
 		private OnClickListener decimo =
 				new OnClickListener()
 					{
@@ -515,6 +517,6 @@ public class Vids extends Activity {
 								Intent intent = new Intent(getApplicationContext(), Atr.class);
 								startActivity(intent);
 						} // end method onClick
-					};	
+					};
 
 }

@@ -13,13 +13,15 @@ import android.app.Activity;
 
 import java.util.Vector;
 
+import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
+
 /**
  * Created by andrea on 27/06/15.
  */
 
 public class Seen extends Activity {
 
-        private DbAdapter dbHelper;
+        private GeneralDbAdapter dbHelper;
         private Cursor cursor;
         private Attrazioni questa;
         public static Attrazioni accedi;
@@ -35,7 +37,7 @@ public class Seen extends Activity {
 
 
 
-            dbHelper = new DbAdapter(this);
+            dbHelper = new GeneralDbAdapter(this);
             dbHelper.open();
           //  dbHelper.createContact("primo","1-1-1");
           //  dbHelper.createContact("secondo","2 ginevro");
@@ -45,8 +47,8 @@ public class Seen extends Activity {
             Integer num = cursor.getCount();
 
             if(cursor.getCount()==0){//se è vuoto caccia dentro qualcosa
-                dbHelper.createContact("primo","1-1-1");
-                dbHelper.createContact("secondo","2 ginevro");
+               // dbHelper.createContact("primo","1-1-1");
+                //dbHelper.createContact("secondo","2 ginevro");
             }
             cursor.moveToLast();
 

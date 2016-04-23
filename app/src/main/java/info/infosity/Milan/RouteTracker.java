@@ -1,7 +1,7 @@
 package info.infosity.Milan;
 
 
-//importa le classi necessarie: location si occupa del gps, 
+//importa le classi necessarie: location si occupa del gps,
 //maps del far apparire la mappa a schermo (non sono certo della sua
 // effettiva utilit�
 import android.app.Activity;
@@ -21,17 +21,21 @@ import java.util.Vector;
 //import com.google.android.maps.MapView;
 
 import android.content.Intent;
-import android.location.Criteria;       
+import android.location.Criteria;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 //import android.os.PowerManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.*;
+
+import info.infosity.Milan.generalDBHelper.GeneralDatabaseHelper;
+import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 
 
 public class RouteTracker extends Activity implements SensorEventListener
@@ -44,7 +48,7 @@ public static int cambio = 0;
 
 private Handler handler;
 
-	private DbAdapter dbHelper;
+	private GeneralDbAdapter dbHelper;
 	private Cursor cursor;
 
 
@@ -1056,7 +1060,7 @@ public static final int google_maps_api_key1=0x7f040001;
    public double l;
    public double lo;
 //   private ProgressBar progbar;
-   
+
    private ImageButton scatto;
    public static Vector<Attrazioni> serie;
    private Attrazioni novenove;
@@ -1133,14 +1137,14 @@ public static final int google_maps_api_key1=0x7f040001;
 
 	private Attrazioni tester;
 
-   
+
    private BearingFrameLayout bearingFrameLayout;
-   
+
    //quattro variabili che richiamano le classi predefinite per il gps:
    private LocationManager locationManager;
 
- 
-   public Vector<Attrazioni> serie()
+
+   public Vector<Attrazioni> getSerie()
    {
 	   tester = new Attrazioni(0,0,"testnome","terstgen","testdesc","testtec",12);
 
@@ -1279,33 +1283,6 @@ public static final int google_maps_api_key1=0x7f040001;
 	   serie.add(Bagatti);
 	   serie.add(Archeological);
 	   serie.add(Ambrosiana);
-	   serie.add(mia);
-	   serie.add(zero1);
-	   serie.add(zero2);
-	   serie.add(zero3);
-	   serie.add(zero4);
-	   serie.add(zero5);
-	   serie.add(zero6);
-	   serie.add(zero7);
-	   serie.add(marina1);
-	   serie.add(marina2);
-	   serie.add(marina3);
-	   serie.add(marina4);
-	   serie.add(marina5);
-	   serie.add(marina6);
-	   serie.add(marina7);
-	   serie.add(casa9);
-	   serie.add(casa7);
-	   serie.add(casa2);
-	   serie.add(casa4);
-	   serie.add(casa6);
-	   serie.add(casa5);
-	   serie.add(casa3);
-	   serie.add(casa8);
-	   serie.add(casa1);
-	   serie.add(casa10);
-	   serie.add(casa11);
-	   serie.add(tester);
 //
 	   return serie;
    }
@@ -1329,10 +1306,6 @@ public static final int google_maps_api_key1=0x7f040001;
      // scatto.setOnClickListener(scattoSoloPerTest);
      // low=(ImageButton) findViewById(R.id.sotto);
       //ADD CODE HERE
-	   tester = new Attrazioni(0,0,"testnome","terstgen","testdesc","testtec",12);
-
-      mia = new Attrazioni(45.942907, 10.27775713,"Teatro della scala", gen12,desc12,tec12, 0.009999);
-      novenove = new Attrazioni(45.808173, 10.105013,"Teatro della scala", gen12,desc12,tec12, 0.009999);
       Teatro_della_scala = new Attrazioni (45.467409, 9.189519,"Teatro della scala", gen1,desc1,tec1, 0.003494);
       Triennale = new Attrazioni (45.472248, 9.173609, "Triennale", gen2,desc2,tec2, 0.007602);
       San_siro = new Attrazioni (45.478143, 9.123852, "San Siro", gen3,desc3,tec3, 0.006444);
@@ -1384,36 +1357,7 @@ public static final int google_maps_api_key1=0x7f040001;
       Bagatti = new Attrazioni (45.469459, 9.195073, "Bagatti Valsecchi Museum", gen49,desc49,tec49, 0.002575);
       Archeological = new Attrazioni (45.465631, 9.178636, "Archaeological Museum", gen50,desc50,tec50, 0.002092);
       Ambrosiana = new Attrazioni (45.463468, 9.185820, "Ambrosiana Library & Picture Gallery", gen51,desc51,tec51, 0.004137);
-      
-      Attrazioni casa1 = new Attrazioni (45.94294244, 10.27767201, "casa1","a","a","a",0.1);
-      Attrazioni casa2 = new Attrazioni (45.94304244, 10.27767201, "casa2","a","a","a",0.1);
-      Attrazioni casa3 = new Attrazioni (45.94314244, 10.27767201, "casa3","a","a","a",0.1);
-      Attrazioni casa4 = new Attrazioni (45.94324244, 10.27767201, "casa4","a","a","a",0.1);
-      Attrazioni casa5 = new Attrazioni (45.94334244, 10.27767201, "casa5","a","a","a",0.1);
-      Attrazioni casa6 = new Attrazioni (45.94344244, 10.27767201, "casa6","a","a","a",0.1);
-      Attrazioni casa7 = new Attrazioni (45.94354244, 10.27767201, "casa7","a","a","a",0.1);
-      Attrazioni casa8 = new Attrazioni (45.95364244, 10.27767201, "casa8","a","a","a",0.1);
-      Attrazioni casa9 = new Attrazioni (45.94374244, 10.27767201, "casa9","a","a","a",0.1);
-      Attrazioni casa10 = new Attrazioni (45.94384244, 10.27767201, "casa10","a","a","a",0.1);
-      Attrazioni casa11 = new Attrazioni (45.94394244, 10.27767201, "casa11","a","a","a",0.1);
-       
-      
-      Attrazioni zero1 = new Attrazioni (45.567796, 10.241108, "vicina","a","a","a",0.1);
-      Attrazioni zero2 = new Attrazioni (   45.577796, 10.251108, "media","a","a","a",0.1);
-      Attrazioni zero3 = new Attrazioni (   45.587796, 10.261108, "distante","a","a","a",0.2);
-      Attrazioni zero4 = new Attrazioni (45.567797, 10.241118, "vicina","a","a","a",0.2);
-      Attrazioni zero5 = new Attrazioni (   45.577796, 10.250108, "media","a","a","a",0.2);
-      Attrazioni zero6 = new Attrazioni (   45.587796, 10.262108, "distante","a","a","a",0.2);
-      Attrazioni zero7 = new Attrazioni (45.567796, 10.241178, "vicina","a","a","a",0.2);
-      
-      Attrazioni marina1 = new Attrazioni (45.806869, 10.068980,"marina1","a","a","a",0.2);
-      Attrazioni marina2 = new Attrazioni (45.804579, 10.068880,"marina2","a","a","a",0.2); 
-      Attrazioni marina3 = new Attrazioni (45.806289, 10.068980,"marina3","a","a","a",0.2);
-      Attrazioni marina4 = new Attrazioni (45.806859, 10.067680,"marina4","a","a","a",0.2);
-      Attrazioni marina5 = new Attrazioni (45.806519, 10.068180,"marina5","a","a","a",0.2);
-      Attrazioni marina6 = new Attrazioni (45.806829, 10.066680,"marina6","a","a","a",0.2);
-      Attrazioni marina7 = new Attrazioni (45.806839, 10.065680,"marina7","a","a","a",0.2);
-      
+
       serie=new Vector<Attrazioni>();
       serie.add(Teatro_della_scala);
       serie.add(Triennale);
@@ -1466,62 +1410,70 @@ public static final int google_maps_api_key1=0x7f040001;
       serie.add(Bagatti);
       serie.add(Archeological);
       serie.add(Ambrosiana);
-      /*serie.add(mia);
-      serie.add(zero1);
-      serie.add(zero2);
-      serie.add(zero3);
-      serie.add(zero4);
-      serie.add(zero5);
-      serie.add(zero6);
-      serie.add(zero7);
-      serie.add(marina1);
-      serie.add(marina2);
-      serie.add(marina3);
-      serie.add(marina4);
-      serie.add(marina5);
-      serie.add(marina6);
-      serie.add(marina7);
-      serie.add(casa9);
-      serie.add(casa7);
-      serie.add(casa2);
-      serie.add(casa4);
-      serie.add(casa6);
-      serie.add(casa5);
-      serie.add(casa3);
-      serie.add(casa8);
-      serie.add(casa1);
-      serie.add(casa10);
-      serie.add(casa11);*/
-	   serie.add(tester);
-//     
-      
+
+
+
+
    // create new MapView using your Google Maps API key
      // bearingFrameLayout = new BearingFrameLayout(this,
        //  getResources().getString(google_maps_api_key1));
-     
 
-   } 
-   
- 
+
+
+	   dbHelper = new GeneralDbAdapter(this);
+	   dbHelper.open();
+
+	   Cursor cursor = dbHelper.fetchAllContacts();
+
+	   Integer num = cursor.getCount();
+	   Log.i("contatore", "PRIMA nel db ci sono: " + num.toString());
+	   if(cursor.getCount()<20)
+	   {
+		   riempiIlDb(serie, dbHelper);
+	   }
+	   cursor = dbHelper.fetchAllContacts();
+	   num = cursor.getCount();
+	   Log.i("contatore", "DOPO nel db ci sono: " + num.toString());
+
+   }
+
+
+	private void riempiIlDb(Vector<Attrazioni> s, GeneralDbAdapter dbh)
+	{
+		for(int i=0; i<s.size(); i++)
+		{
+			Attrazioni a = serie.get(i);
+			String name = a.getNome();
+			String gen = a.getGen();
+			String desc = a.getDesc();
+			String tec = a.getTec();
+			double latitude = a.getLat();
+			double longitude = a.getLon();
+			double distance = a.getDistanza();
+			dbh.createContact(name, gen, desc, tec, latitude, longitude, distance);
+		}
+	}
+
+
   // @Override
-   public void onStart() 
+   public void onStart()
    {
-      super.onStart(); 
-      
+      super.onStart();
+
      // altre parte presa dall'esempio: per ora non ci serve
       Criteria criteria = new Criteria();
       criteria.setAccuracy(Criteria.ACCURACY_FINE);
-      criteria.setBearingRequired(true); 
-      criteria.setCostAllowed(true); 
+      criteria.setBearingRequired(true);
+      criteria.setCostAllowed(true);
       criteria.setPowerRequirement(Criteria.POWER_LOW);
-      criteria.setAltitudeRequired(false); 
+      criteria.setAltitudeRequired(false);
 
-//le righe seguenti sono sempre uguali per ogni programma con gps    
-      locationManager = 
+//le righe seguenti sono sempre uguali per ogni programma con gps
+      locationManager =
          (LocationManager) getSystemService(LOCATION_SERVICE);
-      
+
       locationManager.addGpsStatusListener(gpsStatusListener);
-     
+
             String provider = locationManager.getBestProvider(criteria, true);
 
 
@@ -1530,10 +1482,10 @@ public static final int google_maps_api_key1=0x7f040001;
 
 
      // bearingFrameLayout.invalidate();
-   } 
-   
+   }
 
-   
+
+
    private OnClickListener takePictureButtonListener =
 		      new OnClickListener()
 		      {
@@ -1544,18 +1496,18 @@ public static final int google_maps_api_key1=0x7f040001;
 		            // create new Intent to launch the Slideshowplayer Activity
 		            Intent takePicture =
 		            		new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		                   
+
 		            String value="pathname da definire";
 					takePicture.putExtra(MediaStore.EXTRA_OUTPUT, value);
-		          
-		            		
-		            startActivityForResult(takePicture, TAKE_PICTURE_ID); 
+
+
+		            startActivityForResult(takePicture, TAKE_PICTURE_ID);
 		         } // end method onClick
 		      };
-		      
+
    private OnClickListener scattoSoloPerTest = new OnClickListener()
    {
-	   
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -1598,20 +1550,20 @@ public static final int google_maps_api_key1=0x7f040001;
 				});
        	    }
         }
-        
- 
-        
+
+
+
 	    	Intent intent = new Intent(getApplicationContext(), Vids.class);
 	    	startActivity(intent);
 
-        
+
         if ((niente==1)&(ripetizione==0)){
-   	    	
+
    	    	ripetizione=1;
 
    	    }
-		
-		
+
+
 	}
    };
 
@@ -1638,70 +1590,70 @@ public static final int google_maps_api_key1=0x7f040001;
        // bearingFrameLayout.invalidate();
 	   //scatto.performClick();
     }
-   
- 
+
+
 
   //ora 5 metodi standard  che non ci servono quindi lascio vuoti
    private final LocationListener locationListener =
       new LocationListener()
    {
-    
+
 	   public void onLocationChanged(Location location)
       {
             updateLocation(location); //richiama metodo a ogni cambiamento
-      } 
+      }
 
       public void onProviderDisabled(String provider)
       {
-      } 
+      }
 
       public void onProviderEnabled(String provider)
       {
-      } 
+      }
 
       public void onStatusChanged(String provider,
          int status, Bundle extras)
       {
-      } 
-   }; 
-   
+      }
+   };
+
    GpsStatus.Listener gpsStatusListener = new GpsStatus.Listener()
    {
-      public void onGpsStatusChanged(int event) 
+      public void onGpsStatusChanged(int event)
       {
          if (event == GpsStatus.GPS_EVENT_FIRST_FIX)
          {
            // gpsFix = true;
-           // Toast results = Toast.makeText(RouteTracker.this, 
-             //  "signa", 
+           // Toast results = Toast.makeText(RouteTracker.this,
+             //  "signa",
               // Toast.LENGTH_SHORT);
-            
+
             // center the Toast in the screen
-          //  results.setGravity(Gravity.CENTER, 
-            //   results.getXOffset() / 2, results.getYOffset() / 2);     
+          //  results.setGravity(Gravity.CENTER,
+            //   results.getXOffset() / 2, results.getYOffset() / 2);
             //results.show(); // display the results
          } // end if
       } // end method on GpsStatusChanged
    }; // end anonymous inner class
 
-  
-   
-   protected boolean isRouteDisplayed() 
+
+
+   protected boolean isRouteDisplayed()
    {
-      return false; 
-   } 
-   
+      return false;
+   }
+
    protected void onDestroy() {
 	    super.onDestroy();
-	   
+
 	  }
-   
+
    public void onAccuracyChanged(Sensor sensor, int accuracy) {  }
-   
+
    protected void onResume() {
 	    super.onResume();
 	  }
-	 
+
 	  protected void onPause() {
 	    super.onPause();
 	   }
@@ -1710,11 +1662,11 @@ public static final int google_maps_api_key1=0x7f040001;
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
-     
-} 
+
+}
 
 

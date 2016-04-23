@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import info.infosity.Milan.DatabaseHelper;
+import info.infosity.Milan.generalDBHelper.*;
 
 public class GeneralDbAdapter {
 
@@ -17,7 +17,7 @@ public class GeneralDbAdapter {
 
     private Context context;
     private SQLiteDatabase database;
-    private DatabaseHelper dbHelper;
+    private GeneralDatabaseHelper dbHelper;
 
     // Database fields
 
@@ -48,7 +48,7 @@ public class GeneralDbAdapter {
     }
 
     public GeneralDbAdapter open() throws SQLException {
-        dbHelper = new DatabaseHelper(context);
+        dbHelper = new GeneralDatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
     }
@@ -66,11 +66,10 @@ public class GeneralDbAdapter {
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
     public static final String KEY_DISTANCE = "distance";*/
-    private ContentValues createContentValues(String id, String name , String gen, String tec
+    private ContentValues createContentValues(String name , String gen, String tec
             , String desc, double latitude, double longitude, double distance)
     {
         ContentValues values = new ContentValues();
-        values.put(KEY_CONTACTID, id);
         values.put(KEY_NAME, name);
         values.put(KEY_GEN, gen);
         values.put(KEY_DESC, desc);
@@ -82,10 +81,10 @@ public class GeneralDbAdapter {
     }
 
     //create a contact
-    public long createContact(String id, String name , String gen, String tec
+    public long createContact(String name , String gen, String tec
             , String desc, double latitude, double longitude, double distance)
     {
-        ContentValues initialValues = createContentValues(id, name, gen, tec, desc, latitude,
+        ContentValues initialValues = createContentValues(name, gen, tec, desc, latitude,
                 longitude, distance);
         return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
     }

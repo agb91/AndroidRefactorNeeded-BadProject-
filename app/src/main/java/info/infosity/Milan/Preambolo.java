@@ -29,7 +29,7 @@ public class Preambolo extends Activity {
         setContentView(R.layout.menu20);
 
 
-        serie = appoggio.serie();
+        serie = appoggio.getSerie();
 
         search = (ImageButton) findViewById(R.id.imageButton2);
         search.setOnClickListener(cliccasearch);
