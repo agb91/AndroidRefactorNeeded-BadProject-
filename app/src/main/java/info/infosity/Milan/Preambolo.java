@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.*;
 import android.app.AlertDialog;
 
+import info.infosity.Milan.Global.Globals;
 import info.infosity.Milan.generalDBHelper.GodOfDb;
 
 
@@ -22,17 +23,15 @@ public class Preambolo extends Activity {
     ImageButton info;
 
 
-    private static RouteTracker appoggio = new RouteTracker();
-    public static Vector<Attrazioni> serie = new Vector<Attrazioni>();
+//    private static RouteTracker appoggio = new RouteTracker();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.menu20);
 
-
-        GodOfDb god = new GodOfDb();
-        serie = god.getSerie();
+        Globals.create(this);
 
         search = (ImageButton) findViewById(R.id.imageButton2);
         search.setOnClickListener(cliccasearch);

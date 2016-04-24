@@ -8,6 +8,8 @@ import android.app.Activity;
 
 import java.util.Vector;
 
+import info.infosity.Milan.Global.Globals;
+
 public class AtrSeen extends Activity {
 
     public static Attrazioni questa;
@@ -19,7 +21,7 @@ public class AtrSeen extends Activity {
 
     private static Attrazioni getAtByName(String ago)
     {
-        Vector<Attrazioni> pagliaio = Preambolo.serie;
+        Vector<Attrazioni> pagliaio = Globals.getSerie();
         Attrazioni ris = pagliaio.get(0);
         for (int i=0; i<pagliaio.size(); i++)
         {

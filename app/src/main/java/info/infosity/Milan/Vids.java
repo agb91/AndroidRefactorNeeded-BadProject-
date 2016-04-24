@@ -45,7 +45,6 @@ public class Vids extends Activity {
 
 	//	indietro.setOnClickListener(toccato);
 
-
 		String parola = String.valueOf(RouteTracker.cont);
 
 		if(parola.equals("0"))

@@ -1,5 +1,9 @@
 package info.infosity.Milan.generalDBHelper;
 
+import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
 import android.widget.ImageButton;
 
 import java.util.Vector;
@@ -1087,117 +1091,191 @@ public class GodOfDb {
     private Attrazioni Ambrosiana;
 
 
-    public Vector<Attrazioni> getSerie()
+    private GeneralDbAdapter dbHelper;
+    private Cursor cursor;
+
+    public GodOfDb(Context context)
     {
 
-        mia = new Attrazioni(45.942907, 10.27775713,"Teatro della scala", gen12,desc12,tec12, 0.009999);
-        novenove = new Attrazioni(45.808173, 10.105013,"Teatro della scala", gen12,desc12,tec12, 0.009999);
-        Teatro_della_scala = new Attrazioni (45.467409, 9.189519,"Teatro della scala", gen1,desc1,tec1, 0.003494);
-        Triennale = new Attrazioni (45.472248, 9.173609, "Triennale", gen2,desc2,tec2, 0.007602);
-        San_siro = new Attrazioni (45.478143, 9.123852, "San Siro", gen3,desc3,tec3, 0.006444);
-        Simplon_gate = new Attrazioni (45.475746,	9.172376, "Simplon Gate", gen4,desc4,tec4, 0.003850);
-        Sforza_castle = new Attrazioni (45.470469, 9.179300, "Sforza Castle", gen5,desc5,tec5, 0.005417);
-        Science_museum = new Attrazioni (45.462912, 9.170642, "Science and Technology Museum Leonardo da Vinci", gen6,desc6,tec6,	0.005230);
-        San_nazaro = new Attrazioni (45.458510, 9.192418, "San Nazaro Maggiore", gen7,desc7,tec7, 0.004059);
-        San_vittore = new Attrazioni (45.463131, 9.170797, "San Vittore al Corpo", gen8,desc8,tec8, 0.003905);
-        San_cristoforo = new Attrazioni (45.447734, 9.154687, "San Cristoforo sul Naviglio", gen9,desc9,tec9, 0.006174);
-        San_carlo = new Attrazioni (45.466807, 9.195996, "San Carlo al Corso", gen10,desc10,tec10, 0.004457);
-        San_bernardino = new Attrazioni (45.462525, 9.195468, "San Bernardino delle ossa", gen11,desc11,tec11, 0.003450);
-        San_babila = new Attrazioni (45.466966, 9.198410, "San Babila", gen12,desc12,tec12, 0.003427);
-        San_marco = new Attrazioni (45.473244, 9.188487, "Basilica di San Marco", gen13,desc13,tec13, 0.002879);
-        Royal_villa = new Attrazioni (45.472481, 9.199725, "Royal villa and gardens", gen14,desc14,tec14, 0.006015);
-        Royal_palace = new Attrazioni (45.463130, 9.191181, "Royal palace", gen15,desc15,tec15, 0.003532);
-        Porta_venezia = new Attrazioni (45.474337, 9.205151, "Porta Venezia", gen16,desc16,tec16, 0.002999);
-        Poldi_museum = new Attrazioni (45.468654, 9.191456, "Poldi Pezzoli Museum", gen17,desc17,tec17, 0.003616);
-        Parco_basiliche = new Attrazioni (45.455805, 9.182239, "Parco delle Basiliche", gen18,desc18,tec18, 0.003414);
-        Palazzo_mezzanotte = new Attrazioni (45.465094, 9.183232, "Palazzo Mezzanotte", gen19,desc19,tec19, 0.003139);
-        Palazzo_marino = new Attrazioni (45.466810, 9.190421, "Palazzo Marino", gen20,desc20,tec20, 0.003047);
-        Museum_20 = new Attrazioni (45.463395, 9.190261, "Museum of Twentieth Century", gen21,desc21,tec21, 0.004647);
-        Museum_risorgimento = new Attrazioni (45.472085, 9.189786, "Museo del Risorgimento", gen22,desc22,tec22, 0.004176);
-        Museum_musical_instrument = new Attrazioni (45.470446, 9.179321, "Museum of Musical Instruments", gen23,desc23,tec23, 0.006725);
-        Museum_ancient_art = new Attrazioni (45.468466, 9.180636, "Museum of Ancient Arts", gen24,desc24,tec24, 0.004404);
-        Monumental_cemetry = new Attrazioni (45.487306, 9.177716, "Monumental Cemetry", gen25,desc25,tec25, 0.008554);
-        Modern_art = new Attrazioni (45.472477, 9.199783, "Modern Art Gallery", gen26,desc26,tec26, 0.005465);
-        Planetarium = new Attrazioni (45.473728, 9.203540, "Planetarium", gen27,desc27,tec27, 0.005715);
-        Duomo = new Attrazioni (45.464120, 9.191895, "Milan Cathedral (Duomo)", gen28,desc28,tec28, 0.011302);
-        Indro = new Attrazioni (45.474000, 9.199957, "Indro Montanelli Gardens", gen29,desc29,tec29, 0.010735);
-        Galleria = new Attrazioni (45.465642, 9.189822, "Galleria Vittorio Emanuele II", gen30,desc30,tec30, 0.003375);
-        Diocesean = new Attrazioni (45.454555, 9.181400, "Diocesean Museum", gen31,desc31,tec31, 0.004050);
-        Columns = new Attrazioni (45.458214, 9.181038, "Columns of San Lorenzo", gen32,desc32,tec32, 0.004059);
-        Natural_history = new Attrazioni (45.472772, 9.202394, "Natural History Museum", gen33,desc33,tec33, 0.007400);
-        Aquarium = new Attrazioni (45.474020, 9.180716, "Aquarium", gen34,desc34,tec34, 0.004736);
-        Santa_maria = new Attrazioni (45.470441, 9.185495, "Santa Maria del Carmine", gen35,desc35,tec35, 0.005301);
-        San_maurizio = new Attrazioni (45.465590, 9.178935, "San Maurizio al Monastero Maggiore", gen36,desc36,tec36, 0.003378);
-        Santa_maria2 = new Attrazioni (45.465954, 9.170951, "Santa Maria delle Grazie", gen37,desc37,tec37, 0.004922);
-        Manzoni = new Attrazioni (45.467830, 9.192171, "Manzoni House", gen38,desc38,tec38, 0.003099);
-        Boschi = new Attrazioni (45.478996, 9.211778, "House Museum Boschi di Stefano", gen39,desc39,tec39, 0.004070);
-        Brera_picture = new Attrazioni (45.471977, 9.188104, "Brera Picture Gallery", gen40,desc40,tec40, 0.004950);
-        Brera_garden = new Attrazioni (45.470647, 9.189237, "Brera Botanical Garden", gen41,desc41,tec41, 0.004316);
-        Branca = new Attrazioni (45.473275, 9.173025, "Branca Tower", gen42,desc42,tec42, 0.004047);
-        Bramante = new Attrazioni (45.466074, 9.171908, "Bramante's Sacristy", gen43,desc43,tec43, 0.005663);
-        Sant_ambrogio = new Attrazioni (45.462322, 9.175633, "Basilica of Sant'Ambrogio", gen44,desc44,tec44, 0.009415);
-        Sant_eustorgio = new Attrazioni (45.453960, 9.181054, "Basilica of Sant'Eustorgio", gen45,desc45,tec45, 0.007341);
-        San_simpliciano = new Attrazioni (45.473861, 9.184495, "Basilica of San Simpliciano", gen46,desc46,tec46, 0.006541);
-        San_lorenzo = new Attrazioni (45.458213, 9.182088, "Basilica of San Lorenzo Maggiore", gen47,desc47,tec47, 0.008162);
-        San_calimero = new Attrazioni (45.456572, 9.192990, "Basilica of San Calimero", gen48,desc48,tec48, 0.005833);
-        Bagatti = new Attrazioni (45.469459, 9.195073, "Bagatti Valsecchi Museum", gen49,desc49,tec49, 0.002575);
-        Archeological = new Attrazioni (45.465631, 9.178636, "Archaeological Museum", gen50,desc50,tec50, 0.002092);
-        Ambrosiana = new Attrazioni (45.463468, 9.185820, "Ambrosiana Library & Picture Gallery", gen51,desc51,tec51, 0.004137);
+        dbHelper = new GeneralDbAdapter(context);
+        dbHelper.open();
 
-        serie=new Vector<Attrazioni>();
-        serie.add(Teatro_della_scala);
-        serie.add(Triennale);
-        serie.add(San_siro);
-        serie.add(Simplon_gate);
-        serie.add(Sforza_castle);
-        serie.add(Science_museum);
-        serie.add(San_nazaro);
-        serie.add(San_vittore);
-        serie.add(San_cristoforo);
-        serie.add(San_carlo);
-        serie.add(San_bernardino);
-        serie.add(San_babila);
-        serie.add(San_marco);
-        serie.add(Royal_villa);
-        serie.add(Royal_palace);
-        serie.add(Porta_venezia);
-        serie.add(Poldi_museum);
-        serie.add(Parco_basiliche);
-        serie.add(Palazzo_mezzanotte);
-        serie.add(Palazzo_marino);
-        serie.add(Museum_20);
-        serie.add(Museum_risorgimento);
-        serie.add(Museum_musical_instrument);
-        serie.add(Museum_ancient_art);
-        serie.add(Monumental_cemetry);
-        serie.add(Modern_art);
-        serie.add(Planetarium);
-        serie.add(Duomo);
-        serie.add(Indro);
-        serie.add(Galleria);
-        serie.add(Diocesean);
-        serie.add(Columns);
-        serie.add(Natural_history);
-        serie.add(Aquarium);
-        serie.add(Santa_maria);
-        serie.add(San_maurizio);
-        serie.add(Santa_maria2);
-        serie.add(Manzoni);
-        serie.add(Boschi);
-        serie.add(Brera_picture);
-        serie.add(Brera_garden);
-        serie.add(Branca);
-        serie.add(Bramante);
-        serie.add(Sant_ambrogio);
-        serie.add(Sant_eustorgio);
-        serie.add(San_simpliciano);
-        serie.add(San_lorenzo);
-        serie.add(San_calimero);
-        serie.add(Bagatti);
-        serie.add(Archeological);
-        serie.add(Ambrosiana);
+        Cursor cursor = dbHelper.fetchAllContacts();
+
+        Integer num = cursor.getCount();
+
+        serie = getSerie(context);
+
+        if(cursor.getCount()<20)
+        {
+            riempiIlDb(serie, dbHelper);
+        }
+        cursor = dbHelper.fetchAllContacts();
+        num = cursor.getCount();
+
+      //  dbHelper.close();
+
+    }
+
+
+    private void riempiIlDb(Vector<Attrazioni> s, GeneralDbAdapter dbh)
+    {
+        for(int i=0; i<s.size(); i++)
+        {
+            Attrazioni a = serie.get(i);
+            String name = a.getNome();
+            String gen = a.getGen();
+            String desc = a.getDesc();
+            String tec = a.getTec();
+            double latitude = a.getLat();
+            double longitude = a.getLon();
+            double distance = a.getDistanza();
+            dbh.createContact(name, gen, desc, tec, latitude, longitude, distance);
+        }
+    }
+
+
+
+    public Vector<Attrazioni> getSerie(Context context)
+    {
+
+        dbHelper = new GeneralDbAdapter(context);
+        dbHelper.open();
+
+        Cursor cursor = dbHelper.fetchAllContacts();
+
+        Integer num = cursor.getCount();
+        if(num<20) {
+            mia = new Attrazioni(45.942907, 10.27775713, "Teatro della scala", gen12, desc12, tec12, 0.009999);
+            novenove = new Attrazioni(45.808173, 10.105013, "Teatro della scala", gen12, desc12, tec12, 0.009999);
+            Teatro_della_scala = new Attrazioni(45.467409, 9.189519, "Teatro della scala", gen1, desc1, tec1, 0.003494);
+            Triennale = new Attrazioni(45.472248, 9.173609, "Triennale", gen2, desc2, tec2, 0.007602);
+            San_siro = new Attrazioni(45.478143, 9.123852, "San Siro", gen3, desc3, tec3, 0.006444);
+            Simplon_gate = new Attrazioni(45.475746, 9.172376, "Simplon Gate", gen4, desc4, tec4, 0.003850);
+            Sforza_castle = new Attrazioni(45.470469, 9.179300, "Sforza Castle", gen5, desc5, tec5, 0.005417);
+            Science_museum = new Attrazioni(45.462912, 9.170642, "Science and Technology Museum Leonardo da Vinci", gen6, desc6, tec6, 0.005230);
+            San_nazaro = new Attrazioni(45.458510, 9.192418, "San Nazaro Maggiore", gen7, desc7, tec7, 0.004059);
+            San_vittore = new Attrazioni(45.463131, 9.170797, "San Vittore al Corpo", gen8, desc8, tec8, 0.003905);
+            San_cristoforo = new Attrazioni(45.447734, 9.154687, "San Cristoforo sul Naviglio", gen9, desc9, tec9, 0.006174);
+            San_carlo = new Attrazioni(45.466807, 9.195996, "San Carlo al Corso", gen10, desc10, tec10, 0.004457);
+            San_bernardino = new Attrazioni(45.462525, 9.195468, "San Bernardino delle ossa", gen11, desc11, tec11, 0.003450);
+            San_babila = new Attrazioni(45.466966, 9.198410, "San Babila", gen12, desc12, tec12, 0.003427);
+            San_marco = new Attrazioni(45.473244, 9.188487, "Basilica di San Marco", gen13, desc13, tec13, 0.002879);
+            Royal_villa = new Attrazioni(45.472481, 9.199725, "Royal villa and gardens", gen14, desc14, tec14, 0.006015);
+            Royal_palace = new Attrazioni(45.463130, 9.191181, "Royal palace", gen15, desc15, tec15, 0.003532);
+            Porta_venezia = new Attrazioni(45.474337, 9.205151, "Porta Venezia", gen16, desc16, tec16, 0.002999);
+            Poldi_museum = new Attrazioni(45.468654, 9.191456, "Poldi Pezzoli Museum", gen17, desc17, tec17, 0.003616);
+            Parco_basiliche = new Attrazioni(45.455805, 9.182239, "Parco delle Basiliche", gen18, desc18, tec18, 0.003414);
+            Palazzo_mezzanotte = new Attrazioni(45.465094, 9.183232, "Palazzo Mezzanotte", gen19, desc19, tec19, 0.003139);
+            Palazzo_marino = new Attrazioni(45.466810, 9.190421, "Palazzo Marino", gen20, desc20, tec20, 0.003047);
+            Museum_20 = new Attrazioni(45.463395, 9.190261, "Museum of Twentieth Century", gen21, desc21, tec21, 0.004647);
+            Museum_risorgimento = new Attrazioni(45.472085, 9.189786, "Museo del Risorgimento", gen22, desc22, tec22, 0.004176);
+            Museum_musical_instrument = new Attrazioni(45.470446, 9.179321, "Museum of Musical Instruments", gen23, desc23, tec23, 0.006725);
+            Museum_ancient_art = new Attrazioni(45.468466, 9.180636, "Museum of Ancient Arts", gen24, desc24, tec24, 0.004404);
+            Monumental_cemetry = new Attrazioni(45.487306, 9.177716, "Monumental Cemetry", gen25, desc25, tec25, 0.008554);
+            Modern_art = new Attrazioni(45.472477, 9.199783, "Modern Art Gallery", gen26, desc26, tec26, 0.005465);
+            Planetarium = new Attrazioni(45.473728, 9.203540, "Planetarium", gen27, desc27, tec27, 0.005715);
+            Duomo = new Attrazioni(45.464120, 9.191895, "Milan Cathedral (Duomo)", gen28, desc28, tec28, 0.011302);
+            Indro = new Attrazioni(45.474000, 9.199957, "Indro Montanelli Gardens", gen29, desc29, tec29, 0.010735);
+            Galleria = new Attrazioni(45.465642, 9.189822, "Galleria Vittorio Emanuele II", gen30, desc30, tec30, 0.003375);
+            Diocesean = new Attrazioni(45.454555, 9.181400, "Diocesean Museum", gen31, desc31, tec31, 0.004050);
+            Columns = new Attrazioni(45.458214, 9.181038, "Columns of San Lorenzo", gen32, desc32, tec32, 0.004059);
+            Natural_history = new Attrazioni(45.472772, 9.202394, "Natural History Museum", gen33, desc33, tec33, 0.007400);
+            Aquarium = new Attrazioni(45.474020, 9.180716, "Aquarium", gen34, desc34, tec34, 0.004736);
+            Santa_maria = new Attrazioni(45.470441, 9.185495, "Santa Maria del Carmine", gen35, desc35, tec35, 0.005301);
+            San_maurizio = new Attrazioni(45.465590, 9.178935, "San Maurizio al Monastero Maggiore", gen36, desc36, tec36, 0.003378);
+            Santa_maria2 = new Attrazioni(45.465954, 9.170951, "Santa Maria delle Grazie", gen37, desc37, tec37, 0.004922);
+            Manzoni = new Attrazioni(45.467830, 9.192171, "Manzoni House", gen38, desc38, tec38, 0.003099);
+            Boschi = new Attrazioni(45.478996, 9.211778, "House Museum Boschi di Stefano", gen39, desc39, tec39, 0.004070);
+            Brera_picture = new Attrazioni(45.471977, 9.188104, "Brera Picture Gallery", gen40, desc40, tec40, 0.004950);
+            Brera_garden = new Attrazioni(45.470647, 9.189237, "Brera Botanical Garden", gen41, desc41, tec41, 0.004316);
+            Branca = new Attrazioni(45.473275, 9.173025, "Branca Tower", gen42, desc42, tec42, 0.004047);
+            Bramante = new Attrazioni(45.466074, 9.171908, "Bramante's Sacristy", gen43, desc43, tec43, 0.005663);
+            Sant_ambrogio = new Attrazioni(45.462322, 9.175633, "Basilica of Sant'Ambrogio", gen44, desc44, tec44, 0.009415);
+            Sant_eustorgio = new Attrazioni(45.453960, 9.181054, "Basilica of Sant'Eustorgio", gen45, desc45, tec45, 0.007341);
+            San_simpliciano = new Attrazioni(45.473861, 9.184495, "Basilica of San Simpliciano", gen46, desc46, tec46, 0.006541);
+            San_lorenzo = new Attrazioni(45.458213, 9.182088, "Basilica of San Lorenzo Maggiore", gen47, desc47, tec47, 0.008162);
+            San_calimero = new Attrazioni(45.456572, 9.192990, "Basilica of San Calimero", gen48, desc48, tec48, 0.005833);
+            Bagatti = new Attrazioni(45.469459, 9.195073, "Bagatti Valsecchi Museum", gen49, desc49, tec49, 0.002575);
+            Archeological = new Attrazioni(45.465631, 9.178636, "Archaeological Museum", gen50, desc50, tec50, 0.002092);
+            Ambrosiana = new Attrazioni(45.463468, 9.185820, "Ambrosiana Library & Picture Gallery", gen51, desc51, tec51, 0.004137);
+
+            serie = new Vector<Attrazioni>();
+            serie.add(Teatro_della_scala);
+            serie.add(Triennale);
+            serie.add(San_siro);
+            serie.add(Simplon_gate);
+            serie.add(Sforza_castle);
+            serie.add(Science_museum);
+            serie.add(San_nazaro);
+            serie.add(San_vittore);
+            serie.add(San_cristoforo);
+            serie.add(San_carlo);
+            serie.add(San_bernardino);
+            serie.add(San_babila);
+            serie.add(San_marco);
+            serie.add(Royal_villa);
+            serie.add(Royal_palace);
+            serie.add(Porta_venezia);
+            serie.add(Poldi_museum);
+            serie.add(Parco_basiliche);
+            serie.add(Palazzo_mezzanotte);
+            serie.add(Palazzo_marino);
+            serie.add(Museum_20);
+            serie.add(Museum_risorgimento);
+            serie.add(Museum_musical_instrument);
+            serie.add(Museum_ancient_art);
+            serie.add(Monumental_cemetry);
+            serie.add(Modern_art);
+            serie.add(Planetarium);
+            serie.add(Duomo);
+            serie.add(Indro);
+            serie.add(Galleria);
+            serie.add(Diocesean);
+            serie.add(Columns);
+            serie.add(Natural_history);
+            serie.add(Aquarium);
+            serie.add(Santa_maria);
+            serie.add(San_maurizio);
+            serie.add(Santa_maria2);
+            serie.add(Manzoni);
+            serie.add(Boschi);
+            serie.add(Brera_picture);
+            serie.add(Brera_garden);
+            serie.add(Branca);
+            serie.add(Bramante);
+            serie.add(Sant_ambrogio);
+            serie.add(Sant_eustorgio);
+            serie.add(San_simpliciano);
+            serie.add(San_lorenzo);
+            serie.add(San_calimero);
+            serie.add(Bagatti);
+            serie.add(Archeological);
+            serie.add(Ambrosiana);
 //
-        return serie;
+            return serie;
+        }
+        else
+        {
+            Vector<Attrazioni> risp = new Vector<Attrazioni>();
+            cursor.moveToFirst();
+            do
+            {
+                String name = cursor.getString(1);
+                String gen = cursor.getString(2);
+                String desc = cursor.getString(3);
+                String tec = cursor.getString(4);
+                double lati = cursor.getDouble(5);
+                double longi = cursor.getDouble(6);
+                double distance = cursor.getDouble(7);
+
+                Attrazioni a = new Attrazioni(lati, longi, name, gen, desc, tec, distance);
+                risp.add(a);
+                cursor.moveToNext();
+            }while(cursor.isAfterLast() == false);
+
+            return risp;
+        }
     }
 
 

@@ -13,6 +13,7 @@ import android.app.Activity;
 
 import java.util.Vector;
 
+import info.infosity.Milan.Global.Globals;
 import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 
 /**
@@ -79,7 +80,7 @@ public class Seen extends Activity {
                     btn.setText(pezzo);
                     //btn.setBackgroundColor(Color.rgb(70, 80, 90));
                     linear.addView(btn);
-                    Vector<Attrazioni> atr = Preambolo.serie;
+                    Vector<Attrazioni> atr = Globals.getSerie();
                     btn.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             Intent intent = new Intent(getApplicationContext(), AtrSeen.class);
