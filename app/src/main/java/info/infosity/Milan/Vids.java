@@ -6,11 +6,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.app.Activity;
 import android.content.Intent;
+
+import java.util.Vector;
 
 import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 
@@ -26,28 +29,61 @@ public class Vids extends Activity {
 	private Button bottone8;
 	private Button bottone9;
 	private Button bottone10;
-
+	private Vector<Button> vettoreBottoni;
+	private Vector<Attrazioni> serieDaMostrare;
 	private GeneralDbAdapter dbHelper;
 	private Cursor cursor;
-
-//	private Button indietro;
+	private Attrazioni atr1;
+	private Attrazioni atr2;
+	private Attrazioni atr3;
+	private Attrazioni atr4;
+	private Attrazioni atr5;
+	private Attrazioni atr6;
+	private Attrazioni atr7;
+	private Attrazioni atr8;
+	private Attrazioni atr9;
+	private Attrazioni atr10;
+	private Vector<Attrazioni> attrazioniDaMostrare = new Vector<Attrazioni>();
 
 	public static String nomeattrazione;
 	public static int numVettoreAttrazione;
 
     public void onCreate(Bundle savedInstanceState){
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main2);
+		vettoreBottoni = new Vector<Button>();
+		creaBottoni();
+		riempiBottoni();
 
+		serieDaMostrare = RouteTracker.getOttenuteserie();
+		//Log.i("seriedim" , "la serie è grandde : " + serieDaMostrare.size());
+		if(serieDaMostrare.size()>0) {
+			creaAttrazioni();
+			int quanti = serieDaMostrare.size();
+			if (quanti > 9) {
+				quanti = 10;
+			}
 
-	//	indietro = (Button) findViewById(R.id.ritorno);
-
-	//	indietro.setOnClickListener(toccato);
-
-		String parola = String.valueOf(RouteTracker.cont);
-
-		if(parola.equals("0"))
+			for (int i = 0; i < quanti; i++) {
+				final int valore = i;
+				Attrazioni questa = serieDaMostrare.get(i);
+				vettoreBottoni.get(i).setText(questa.getNome());
+				vettoreBottoni.get(i).setVisibility(View.VISIBLE);
+				vettoreBottoni.get(i).setOnClickListener(
+						new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								scrivi(attrazioniDaMostrare.get(valore));
+								nomeattrazione = attrazioniDaMostrare.get(valore).getNome();
+								numVettoreAttrazione = valore;
+								Intent intent = new Intent(getApplicationContext(), Atr.class);
+								startActivity(intent);
+							}
+						}
+				);
+			}
+		}
+		else
 		{
 			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("Nothing found. Go back home?")
@@ -66,282 +102,82 @@ public class Vids extends Activity {
 			final AlertDialog alert = builder.create();
 			alert.show();
 		}
-
-		if(parola.equals("1"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-	    }
-
-		if(parola.equals("2"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-
-	    }
-
-		if(parola.equals("3"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-
-	    }
-
-		if(parola.equals("4"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-
-	    }
-
-		if(parola.equals("5"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-
-		}
-
-		if(parola.equals("6"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-			bottone6=(Button) findViewById(R.id.nome6);
-			bottone6.setOnClickListener(sesto);
-			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
-			bottone6.setVisibility(View.VISIBLE);
-
-	    }
-
-		if(parola.equals("7"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-			bottone6=(Button) findViewById(R.id.nome6);
-			bottone6.setOnClickListener(sesto);
-			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
-			bottone6.setVisibility(View.VISIBLE);
-			bottone7=(Button) findViewById(R.id.nome7);
-			bottone7.setOnClickListener(settimo);
-			bottone7.setText(RouteTracker.ottenuteserie.get(6).getNome());
-			bottone7.setVisibility(View.VISIBLE);
-
-	    }
-
-		if(parola.equals("8"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-			bottone6=(Button) findViewById(R.id.nome6);
-			bottone6.setOnClickListener(sesto);
-			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
-			bottone6.setVisibility(View.VISIBLE);
-			bottone7=(Button) findViewById(R.id.nome7);
-			bottone7.setOnClickListener(settimo);
-			bottone7.setText(RouteTracker.ottenuteserie.get(6).getNome());
-			bottone7.setVisibility(View.VISIBLE);
-			bottone8=(Button) findViewById(R.id.nome8);
-			bottone8.setOnClickListener(ottavo);
-			bottone8.setText(RouteTracker.ottenuteserie.get(7).getNome());
-			bottone8.setVisibility(View.VISIBLE);
-
-	    }
-
-
-
-		if(parola.equals("9"))
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-			bottone6=(Button) findViewById(R.id.nome6);
-			bottone6.setOnClickListener(sesto);
-			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
-			bottone6.setVisibility(View.VISIBLE);
-			bottone7=(Button) findViewById(R.id.nome7);
-			bottone7.setOnClickListener(settimo);
-			bottone7.setText(RouteTracker.ottenuteserie.get(6).getNome());
-			bottone7.setVisibility(View.VISIBLE);
-			bottone8=(Button) findViewById(R.id.nome8);
-			bottone8.setOnClickListener(ottavo);
-			bottone8.setText(RouteTracker.ottenuteserie.get(7).getNome());
-			bottone8.setVisibility(View.VISIBLE);
-			bottone9=(Button) findViewById(R.id.nome9);
-			bottone9.setOnClickListener(nono);
-			bottone9.setText(RouteTracker.ottenuteserie.get(8).getNome());
-			bottone9.setVisibility(View.VISIBLE);
-
-
-	    }
-
-		if(parola.equals("10")|| Double.valueOf(parola)>=11)
-		{
-			bottone1=(Button) findViewById(R.id.nome1);
-			bottone1.setOnClickListener(primo);
-			bottone1.setText(RouteTracker.ottenuteserie.get(0).getNome());
-			bottone1.setVisibility(View.VISIBLE);
-			bottone2=(Button) findViewById(R.id.nome2);
-			bottone2.setOnClickListener(secondo);
-			bottone2.setText(RouteTracker.ottenuteserie.get(1).getNome());
-			bottone2.setVisibility(View.VISIBLE);
-			bottone3=(Button) findViewById(R.id.nome3);
-			bottone3.setOnClickListener(terzo);
-			bottone3.setText(RouteTracker.ottenuteserie.get(2).getNome());
-			bottone3.setVisibility(View.VISIBLE);
-			bottone4=(Button) findViewById(R.id.nome4);
-			bottone4.setOnClickListener(quarto);
-			bottone4.setText(RouteTracker.ottenuteserie.get(3).getNome());
-			bottone4.setVisibility(View.VISIBLE);
-			bottone5=(Button) findViewById(R.id.nome5);
-			bottone5.setOnClickListener(quinto);
-			bottone5.setText(RouteTracker.ottenuteserie.get(4).getNome());
-			bottone5.setVisibility(View.VISIBLE);
-			bottone6=(Button) findViewById(R.id.nome6);
-			bottone6.setOnClickListener(sesto);
-			bottone6.setText(RouteTracker.ottenuteserie.get(5).getNome());
-			bottone6.setVisibility(View.VISIBLE);
-			bottone7=(Button) findViewById(R.id.nome7);
-			bottone7.setOnClickListener(settimo);
-			bottone7.setText(RouteTracker.ottenuteserie.get(6).getNome());
-			bottone7.setVisibility(View.VISIBLE);
-			bottone8=(Button) findViewById(R.id.nome8);
-			bottone8.setOnClickListener(ottavo);
-			bottone8.setText(RouteTracker.ottenuteserie.get(7).getNome());
-			bottone8.setVisibility(View.VISIBLE);
-			bottone9=(Button) findViewById(R.id.nome9);
-			bottone9.setOnClickListener(nono);
-			bottone9.setText(RouteTracker.ottenuteserie.get(8).getNome());
-			bottone9.setVisibility(View.VISIBLE);
-			bottone10=(Button) findViewById(R.id.nome10);
-			bottone10.setOnClickListener(decimo);
-			bottone10.setText(RouteTracker.ottenuteserie.get(9).getNome());
-			bottone10.setVisibility(View.VISIBLE);
-
-
-	    }
-
-
 	}
+
+	public Vector<Attrazioni> getAttrazioniDaMostrare()
+	{
+		return attrazioniDaMostrare;
+	}
+
+	private void creaBottoni()
+	{
+		bottone1=(Button) findViewById(R.id.nome1);
+		bottone2=(Button) findViewById(R.id.nome2);
+		bottone3=(Button) findViewById(R.id.nome3);
+		bottone4=(Button) findViewById(R.id.nome4);
+		bottone5=(Button) findViewById(R.id.nome5);
+		bottone6=(Button) findViewById(R.id.nome6);
+		bottone7=(Button) findViewById(R.id.nome7);
+		bottone8=(Button) findViewById(R.id.nome8);
+		bottone9=(Button) findViewById(R.id.nome9);
+		bottone10=(Button) findViewById(R.id.nome10);
+	}
+
+	private void creaAttrazioni()
+	{
+		attrazioniDaMostrare.add(atr1);
+		attrazioniDaMostrare.add(atr2);
+		attrazioniDaMostrare.add(atr3);
+		attrazioniDaMostrare.add(atr4);
+		attrazioniDaMostrare.add(atr5);
+		attrazioniDaMostrare.add(atr6);
+		attrazioniDaMostrare.add(atr7);
+		attrazioniDaMostrare.add(atr8);
+		attrazioniDaMostrare.add(atr9);
+		for(int i = 0; i<serieDaMostrare.size(); i++)
+		{
+			attrazioniDaMostrare.set(i,serieDaMostrare.get(i));
+		}
+		/*atr1 = serieDaMostrare.get(0);
+		atr2 = serieDaMostrare.get(1);
+		atr3 = serieDaMostrare.get(2);
+		atr4 = serieDaMostrare.get(3);
+		atr5 = serieDaMostrare.get(4);
+		atr6 = serieDaMostrare.get(5);
+		atr7 = serieDaMostrare.get(6);
+		atr8 = serieDaMostrare.get(7);
+		atr9 = serieDaMostrare.get(8);
+		atr10 = serieDaMostrare.get(9);*/
+	}
+
+	private void riempiAttrazioni()
+	{
+		attrazioniDaMostrare.add(atr1);
+		attrazioniDaMostrare.add(atr2);
+		attrazioniDaMostrare.add(atr3);
+		attrazioniDaMostrare.add(atr4);
+		attrazioniDaMostrare.add(atr5);
+		attrazioniDaMostrare.add(atr6);
+		attrazioniDaMostrare.add(atr7);
+		attrazioniDaMostrare.add(atr8);
+		attrazioniDaMostrare.add(atr9);
+		attrazioniDaMostrare.add(atr10);
+	}
+
+	private void riempiBottoni()
+	{
+		vettoreBottoni.add(bottone1);
+		vettoreBottoni.add(bottone2);
+		vettoreBottoni.add(bottone3);
+		vettoreBottoni.add(bottone4);
+		vettoreBottoni.add(bottone5);
+		vettoreBottoni.add(bottone6);
+		vettoreBottoni.add(bottone7);
+		vettoreBottoni.add(bottone8);
+		vettoreBottoni.add(bottone9);
+		vettoreBottoni.add(bottone10);
+	}
+
 
 	private void scrivi(Attrazioni a)
 	{
@@ -349,173 +185,19 @@ public class Vids extends Activity {
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
-		//  Calendar c = Calendar.getInstance();
-		// int seconds = c.get(Calendar.SECOND);
-
-		//dbHelper.createContact(a.getNome(), now.toString(),null,null,null,null,null,null);
-
 		dbHelper.close();
 	}
 
-	private OnClickListener toccato =
-		      new OnClickListener()
-		      {
-		         // launch image choosing activity
-		         @Override
-		         public void onClick(View v)
-		         {
-		            Intent intent = new Intent(getApplicationContext(), RouteTracker.class);
-		            startActivity(intent);
-		         } // end method onClick
-		      };
 
-	private OnClickListener primo =
-			new OnClickListener()
-				{
-				 @Override
-				 public void onClick(View v)
-				     {
-						 scrivi(RouteTracker.ottenuteserie.get(0));
-				        nomeattrazione=RouteTracker.ottenuteserie.get(0).getNome();
-				        numVettoreAttrazione=0;
-				        Intent intent = new Intent(getApplicationContext(), Atr.class);
-				       startActivity(intent);
-				     } // end method onClick
-				 };
-
-	private OnClickListener secondo =
-			new OnClickListener()
-				{
-				@Override
-					public void onClick(View v)
-						{
-							scrivi(RouteTracker.ottenuteserie.get(1));
-							nomeattrazione=RouteTracker.ottenuteserie.get(1).getNome();
-							numVettoreAttrazione=1;
-							Intent intent = new Intent(getApplicationContext(), Atr.class);
-							startActivity(intent);
-						} // end method onClick
-					};
-
-		private OnClickListener terzo =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(2));
-								nomeattrazione=RouteTracker.ottenuteserie.get(2).getNome();
-								numVettoreAttrazione=2;
-								Intent intent = new Intent(getApplicationContext(), Atr.class);
-
-										startActivity(intent);
-							} // end method onClick
-					};
-
-
-		private OnClickListener quarto =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(3));
-								nomeattrazione=RouteTracker.ottenuteserie.get(3).getNome();
-									numVettoreAttrazione=3;
-									Intent intent = new Intent(getApplicationContext(), Atr.class);
-									startActivity(intent);
-							} // end method onClick
-					};
-
-		private OnClickListener quinto =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(4));
-
-								nomeattrazione=RouteTracker.ottenuteserie.get(4).getNome();
-								numVettoreAttrazione=4;
-								Intent intent = new Intent(getApplicationContext(), Atr.class);
-								startActivity(intent);
-							} // end method onClick
-					};
-
-
-		private OnClickListener sesto =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(5));
-
-								nomeattrazione=RouteTracker.ottenuteserie.get(5).getNome();
-									numVettoreAttrazione=5;
-									Intent intent = new Intent(getApplicationContext(), Atr.class);
-									startActivity(intent);
-							} // end method onClick
-					};
-
-		private OnClickListener settimo =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(6));
-
-								nomeattrazione=RouteTracker.ottenuteserie.get(6).getNome();
-									numVettoreAttrazione=6;
-									Intent intent = new Intent(getApplicationContext(), Atr.class);
-									startActivity(intent);
-							} // end method onClick
-					};
-
-		private OnClickListener ottavo =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(7));
-
-								nomeattrazione=RouteTracker.ottenuteserie.get(7).getNome();
-									numVettoreAttrazione=7;
-									Intent intent = new Intent(getApplicationContext(), Atr.class);
-									startActivity(intent);
-							} // end method onClick
-					};
-
-		private OnClickListener nono =
-				new OnClickListener()
-					{
-					@Override
-					public void onClick(View v)
-							{
-								scrivi(RouteTracker.ottenuteserie.get(8));
-
-								nomeattrazione=RouteTracker.ottenuteserie.get(8).getNome();
-									numVettoreAttrazione=8;
-									Intent intent = new Intent(getApplicationContext(), Atr.class);
-									startActivity(intent);
-						} // end method onClick
-					};
-
-		private OnClickListener decimo =
-				new OnClickListener()
-					{
-					@Override
-						public void onClick(View v)
-						{
-							scrivi(RouteTracker.ottenuteserie.get(9));
-
-							nomeattrazione=RouteTracker.ottenuteserie.get(9).getNome();
-								numVettoreAttrazione=9;
-								Intent intent = new Intent(getApplicationContext(), Atr.class);
-								startActivity(intent);
-						} // end method onClick
-					};
+/*	private OnClickListener toccato =
+		  new OnClickListener()
+	{
+	 @Override
+	 public void onClick(View v)
+	 {
+		Intent intent = new Intent(getApplicationContext(), RouteTracker.class);
+		startActivity(intent);
+	 } // end method onClick
+	};*/
 
 }

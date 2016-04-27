@@ -62,68 +62,58 @@
 		//quattro variabili che richiamano le classi predefinite per il gps:
 		private LocationManager locationManager;
 
-	   @Override
-	   public void onCreate(Bundle savedInstanceState)
-	   //oncreate c'� in tutti i programmi
-	   {
-		   super.onCreate(savedInstanceState);
-		   requestWindowFeature(Window.FEATURE_NO_TITLE);
-		   setContentView(R.layout.loading);
-
-		   ottenuteserie = new Vector<Attrazioni>(); // vettore di attrazioni puntate
-
-		   scatto = (ImageButton) findViewById(R.id.imageView2);
-	   }
+		@Override
+		public void onCreate(Bundle savedInstanceState)
+		{
+			super.onCreate(savedInstanceState);
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			setContentView(R.layout.loading);
+			ottenuteserie = new Vector<Attrazioni>(); // vettore di attrazioni puntate
+			scatto = (ImageButton) findViewById(R.id.imageView2);
+		}
 
 
 
-	  // @Override
-	   public void onStart()
-	   {
-		  super.onStart();
+		// @Override
+		public void onStart()
+		{
+			super.onStart();
+			serie = Globals.getSerie();
 
-		  serie = Globals.getSerie();
-
-		   // altre parte presa dall'esempio: per ora non ci serve
-		  Criteria criteria = new Criteria();
-		  criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		  criteria.setBearingRequired(true);
-		  criteria.setCostAllowed(true);
-		  criteria.setPowerRequirement(Criteria.POWER_LOW);
-		  criteria.setAltitudeRequired(false);
-
-	//le righe seguenti sono sempre uguali per ogni programma con gps
-		  locationManager =
-			 (LocationManager) getSystemService(LOCATION_SERVICE);
-
-		  locationManager.addGpsStatusListener(gpsStatusListener);
-
-				String provider = locationManager.getBestProvider(criteria, true);
+			Criteria criteria = new Criteria();
+			criteria.setAccuracy(Criteria.ACCURACY_FINE);
+			criteria.setBearingRequired(true);
+			criteria.setCostAllowed(true);
+			criteria.setPowerRequirement(Criteria.POWER_LOW);
+			criteria.setAltitudeRequired(false);
+			locationManager =
+				(LocationManager) getSystemService(LOCATION_SERVICE);
+			locationManager.addGpsStatusListener(gpsStatusListener);
+			String provider = locationManager.getBestProvider(criteria, true);
+			locationManager.requestLocationUpdates(provider, 0, 0,
+				locationListener);
 
 
-		  locationManager.requestLocationUpdates(provider, 0, 0,
-			  locationListener);
-	   }
+			// per test alla cazzo prossime 2 righe
+			scatto.setOnClickListener(gestioneScatto);
+			scatto.performClick();
+		}
 
-	   private double distante (Attrazioni a)
-	   {
-		   double risp = 0;
-
-		   double cl =a.getLat();
-		   double clo =a.getLon();
-		   double distanza = a.getDistanza();
-		   double distLa= Math.abs(l - cl);
-		   double distLo= Math.abs(lo - clo);
-
-		 /*  if((distLa<distanza)&(distLo<distanza)){
-			   risp = true;
-		   }*/
-           Double tot = distLa + distLo;
-		   return tot;
-	   }
+		private double distante (Attrazioni a)
+		{
+			double risp = 0;
+			double cl =a.getLat();
+			double clo =a.getLon();
+			double distanza = a.getDistanza();
+			double distLa= Math.abs(l - cl);
+			double distLo= Math.abs(lo - clo);
+			Double tot = distLa + distLo;
+  			return tot;
+		}
 
         private boolean vicina(double vera, double massima)
         {
+			Log.i("dists","VERA : " +vera + ";   MASSIMA: " +  massima);
             if(vera<massima)
             {
                 return true;
@@ -134,14 +124,21 @@
             }
         }
 
+		public static Vector<Attrazioni> getOttenuteserie()
+		{
+			return ottenuteserie;
+		}
+
         private void gestisciVicinanza(Attrazioni questa, double distante)
         {
-            //scrivi(questa);
+			//scrivi(questa);
             cont++;
             questa.setScarto(distante);
 
             ottenuteserie.add(questa);
-            Collections.sort(ottenuteserie, new Comparator<Attrazioni>() {
+			//Log.i("VICIANNZA", "VICINANZA!!, dim: " + ottenuteserie.size());
+
+			Collections.sort(ottenuteserie, new Comparator<Attrazioni>() {
                 public int compare(Attrazioni a1, Attrazioni a2) {
                     Double d1 = Double.valueOf(a1.getScarto());
                     Double d2 = Double.valueOf(a2.getScarto());
@@ -173,6 +170,7 @@
                     boolean vicina = vicina(distante, questa.getDistanza());
                     boolean orientata = orientata(); //TODO
 			        if(vicina && orientata){
+						Log.i("AVVISO","DENTRO: " + serie.size());
                         niente=0;
                         gestisciVicinanza(questa, distante);
 			        }

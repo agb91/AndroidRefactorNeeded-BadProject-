@@ -16,7 +16,7 @@ public class FragmentTab2 extends Fragment {
         EditText testo;
         testo = (EditText) rootView.findViewById(R.id.testoTab2);
         int pos=Vids.numVettoreAttrazione;
-        Attrazioni attuale=RouteTracker.ottenuteserie.get(pos);
+        Attrazioni attuale=RouteTracker.getOttenuteserie().get(pos);
         String generale=attuale.getDesc();
         testo.setText(Html.fromHtml(generale));
         testo.setKeyListener(null);

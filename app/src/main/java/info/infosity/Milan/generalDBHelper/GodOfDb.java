@@ -1016,10 +1016,15 @@ public class GodOfDb {
             + "<strong>Other</strong><br>"
             + "Possibility to buy a combined ticket for 20€ (instead of 25€), visit include also the Bramante's Sacristy";
 
+
+
     private ImageButton scatto;
     private static Vector<Attrazioni> serie;
-    private Attrazioni novenove;
-    private Attrazioni mia;
+
+    private Attrazioni a;
+    private Attrazioni b;
+    private Attrazioni c;
+    private Attrazioni d;
     private Attrazioni prima;
     private Attrazioni seconda;
     private Attrazioni terza;
@@ -1146,8 +1151,11 @@ public class GodOfDb {
 
         Integer num = cursor.getCount();
         if(num<20) {
-            mia = new Attrazioni(45.942907, 10.27775713, "Teatro della scala", gen12, desc12, tec12, 0.009999);
-            novenove = new Attrazioni(45.808173, 10.105013, "Teatro della scala", gen12, desc12, tec12, 0.009999);
+
+            a = new Attrazioni(0, 0, "testa", gen12, desc12, tec12, 9990.109999);
+            b = new Attrazioni(0, 0, "testb", gen13, desc12, tec12, 9990.109999);
+            c = new Attrazioni(0, 0, "testc", gen14, desc12, tec12, 9990.109999);
+            d = new Attrazioni(0, 0, "testd", gen15, desc12, tec12, 9990.109999);
             Teatro_della_scala = new Attrazioni(45.467409, 9.189519, "Teatro della scala", gen1, desc1, tec1, 0.003494);
             Triennale = new Attrazioni(45.472248, 9.173609, "Triennale", gen2, desc2, tec2, 0.007602);
             San_siro = new Attrazioni(45.478143, 9.123852, "San Siro", gen3, desc3, tec3, 0.006444);
@@ -1252,6 +1260,10 @@ public class GodOfDb {
             serie.add(Bagatti);
             serie.add(Archeological);
             serie.add(Ambrosiana);
+            serie.add(a);
+            serie.add(b);
+            serie.add(c);
+            serie.add(d);
 //
             return serie;
         }
