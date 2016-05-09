@@ -8,6 +8,7 @@
 	import android.hardware.Sensor;
 	import android.hardware.SensorEvent;
 	import android.hardware.SensorEventListener;
+	import android.hardware.SensorManager;
 	import android.os.Bundle;
 	import android.os.Handler;
 
@@ -40,6 +41,23 @@
 
 	public class RouteTracker extends Activity implements SensorEventListener
 	{
+		private float Rot[] = null; //for gravity rotational data
+		//don't use R because android uses that for other stuff
+		private float I[] = null; //for magnetic rotational data
+		private float accels[] = new float[3];
+		private float mags[] = new float[3];
+		private float[] values = new float[3];
+
+		// 1 NNO; 2 NOO; 3 OOS; 4 SSO; 5 SSE, 6 SEE, 7NEE, 8 NNE
+		private int caseGoalDirection = 0; //
+
+		private float azimuth;
+		private float pitch;
+		private float roll;
+
+		private SensorEventListener sListener;
+		private SensorManager sManager;
+
 		private static Vector<Attrazioni> ottenuteserie;
 		private static int cont;
 		private static int cambio = 0;
@@ -66,6 +84,8 @@
 		public void onCreate(Bundle savedInstanceState)
 		{
 			super.onCreate(savedInstanceState);
+			sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.loading);
 			ottenuteserie = new Vector<Attrazioni>(); // vettore di attrazioni puntate
@@ -78,6 +98,8 @@
 		public void onStart()
 		{
 			super.onStart();
+			ottenuteserie = new Vector<Attrazioni>();
+			ottenuteserie.clear();
 			serie = Globals.getSerie();
 
 			Criteria criteria = new Criteria();
@@ -242,9 +264,165 @@
             super.onPause();
         }
 
-        @Override
-        public void onSensorChanged(SensorEvent event) {}
+		private void checkBasso(int azint, int piint, int roint) {
+			if (near(piint, -90)) {
+				Log.i("basso", "schermo in basso");
+			}
+		}
 
+		// 1 NNO; 2 NOO; 3 OOS; 4 SSO; 5 SSE, 6 SEE, 7NEE, 8 NNE
+		//int caseGoalDirection = 0; //
+		private void checkVertical(int azint, int piint, int roint) {
+			if (near(piint, 0) && near(roint, 0)) {
+				//setDialog("posizione da foto con cell in verticale");
+				// il valore interessato è azimuth
+				if (near(azint, 0)) {
+					Log.i("avviso","cell in verticale NORD");
+					if(caseGoalDirection==1 || caseGoalDirection==8)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				if (near(azint, 45)) {
+					Log.i("avviso","cell in verticale NORD-EST");
+					if(caseGoalDirection==7 || caseGoalDirection==8)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				// 1 NNO; 2 NOO; 3 OOS; 4 SSO; 5 SSE, 6 SEE, 7NEE, 8 NNE
+				//int caseGoalDirection = 0; //
+				if (near(azint, 90)) {
+					Log.i("avviso","cell in verticale EST");
+					if(caseGoalDirection==7 || caseGoalDirection==6)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				if (near(azint, 135)) {
+					Log.i("avviso","cell in verticale SUD-EST");
+					if(caseGoalDirection==5 || caseGoalDirection==6)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				// 1 NNO; 2 NOO; 3 OOS; 4 SSO; 5 SSE, 6 SEE, 7NEE, 8 NNE
+				//int caseGoalDirection = 0; //
+				if (near(azint, -135)) {
+					Log.i("avviso","cell in verticale SUD-OVEST");
+					if(caseGoalDirection==4 || caseGoalDirection==3)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				if (near(azint, -45)) {
+					Log.i("avviso","cell in verticale NORD-OVEST");
+					if(caseGoalDirection==1 || caseGoalDirection==2)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				// 1 NNO; 2 NOO; 3 OOS; 4 SSO; 5 SSE, 6 SEE, 7NEE, 8 NNE
+				//int caseGoalDirection = 0; //
+				if (near(azint, -90)) {
+					Log.i("avviso","cell in verticale ovest");
+					if(caseGoalDirection==2 || caseGoalDirection==3)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+				if (near(azint, -180) || near(azint, +180)) {
+					Log.i("avviso","cell in verticale SUD");
+					if(caseGoalDirection==4 || caseGoalDirection==5)
+					{
+						Log.i("bingo", "STO PUNTANTO");
+					}
+				}
+			}
+		}
+
+		public boolean near(int a, int rif) {
+			if (Math.abs(a - rif) < 22) {
+				return true;
+			}
+			if (Math.abs(rif - a) < 22) {
+				return true;
+			}
+			return false;
+		}
+
+		private void checkHorizontal(int azint, int piint, int roint) {
+			Log.i("orizzontale", "cell in orizzontale");
+			if (near(piint, 90)) {
+				if (near(roint, 0) && (near(azint, 180) || near(azint, -180))) {
+					Log.i("avviso","schermo in alto SUD");
+				}
+				if (near(roint, 0) && near(azint, 0)) {
+					Log.i("avviso","schermo in alto NORD");
+				}
+				if (near(roint, 0) && near(azint, -90)) {
+					Log.i("avviso","schermo in alto OVEST");
+				}
+				if (near(roint, 0) && near(azint, 90)) {
+					Log.i("avviso","schermo in alto EST");
+				}
+			}
+		}
+
+		private int[] getCompassValue()
+		{
+			int ris[] = new int[3];
+			Rot = new float[9];
+			I = new float[9];
+			SensorManager.getRotationMatrix(Rot, I, accels, mags);
+			// Correct if screen is in Landscape
+
+			float[] outR = new float[9];
+			SensorManager.remapCoordinateSystem(Rot, SensorManager.AXIS_X, SensorManager.AXIS_Z, outR);
+			SensorManager.getOrientation(outR, values);
+
+			azimuth = values[0] * 57.2957795f; //looks like we don't need this one
+			pitch = values[1] * 57.2957795f;
+			roll = values[2] * 57.2957795f;
+
+			int azint = Math.round(azimuth);
+			int piint = Math.round(pitch);
+			int roint = Math.round(roll);
+
+			ris[0]=azint;
+			ris[1]=piint;
+			ris[2]=roint;
+			return ris;
+		}
+
+		@Override
+        public void onSensorChanged(SensorEvent event) {
+			//sceglie quale sensore usare
+			switch (event.sensor.getType()) {
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					mags = event.values.clone();
+					break;
+				case Sensor.TYPE_ACCELEROMETER:
+					accels = event.values.clone();
+					break;
+			}
+			//se qualcosa vive
+			if (mags != null && accels != null) {
+				int compassValueInt[] = getCompassValue();
+
+				int azint = compassValueInt[0];
+				int piint = compassValueInt[1];
+				int roint = compassValueInt[2];
+
+				Log.i("valori letti", "valori letti= " + azint + "; " + piint + "; " + roint);
+
+				checkVertical(azint, piint, roint);
+				checkHorizontal(azint, piint, roint);
+				checkBasso(azint, piint, roint);
+				mags = null; //retrigger the loop when things are repopulated
+				accels = null; ////retrigger the loop when things are repopulated
+			}
+		}
 	}
 
 

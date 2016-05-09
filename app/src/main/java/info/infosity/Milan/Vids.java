@@ -54,15 +54,15 @@ public class Vids extends Activity {
 		vettoreBottoni = new Vector<Button>();
 		creaBottoni();
 		riempiBottoni();
-
+		serieDaMostrare = new Vector<Attrazioni>();
 		serieDaMostrare = RouteTracker.getOttenuteserie();
 		//Log.i("seriedim" , "la serie è grandde : " + serieDaMostrare.size());
 		if(serieDaMostrare.size()>0) {
-			creaAttrazioni();
 			int quanti = serieDaMostrare.size();
 			if (quanti > 9) {
-				quanti = 10;
+				quanti = 9;
 			}
+			creaAttrazioni();
 
 			for (int i = 0; i < quanti; i++) {
 				final int valore = i;
@@ -134,8 +134,14 @@ public class Vids extends Activity {
 		attrazioniDaMostrare.add(atr7);
 		attrazioniDaMostrare.add(atr8);
 		attrazioniDaMostrare.add(atr9);
-		for(int i = 0; i<serieDaMostrare.size(); i++)
+		int quanti = serieDaMostrare.size();
+		if(quanti>9)
 		{
+			quanti=9;
+		}
+		for(int i = 0; i<quanti; i++)
+		{
+			//Log.i("DIM VETTORI: " , " DIM SERIE: " + serieDaMostrare.size() + ";  atr da mostrare: " + attrazioniDaMostrare.size());
 			attrazioniDaMostrare.set(i,serieDaMostrare.get(i));
 		}
 		/*atr1 = serieDaMostrare.get(0);
