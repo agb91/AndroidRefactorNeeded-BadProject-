@@ -16,6 +16,7 @@ import android.content.Intent;
 import java.util.Vector;
 
 import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
+import info.infosity.Milan.visitedDBHelper.VisitedDbAdapter;
 
 public class Vids extends Activity {
 
@@ -29,9 +30,10 @@ public class Vids extends Activity {
 	private Button bottone8;
 	private Button bottone9;
 	private Button bottone10;
+	private Button ritorno;
 	private Vector<Button> vettoreBottoni;
 	private Vector<Attrazioni> serieDaMostrare;
-	private GeneralDbAdapter dbHelper;
+	private VisitedDbAdapter dbHelper;
 	private Cursor cursor;
 	private Attrazioni atr1;
 	private Attrazioni atr2;
@@ -54,6 +56,7 @@ public class Vids extends Activity {
 		vettoreBottoni = new Vector<Button>();
 		creaBottoni();
 		riempiBottoni();
+		setRitorno();
 		serieDaMostrare = new Vector<Attrazioni>();
 		serieDaMostrare = RouteTracker.getOttenuteserie();
 		//Log.i("seriedim" , "la serie è grandde : " + serieDaMostrare.size());
@@ -121,6 +124,7 @@ public class Vids extends Activity {
 		bottone8=(Button) findViewById(R.id.nome8);
 		bottone9=(Button) findViewById(R.id.nome9);
 		bottone10=(Button) findViewById(R.id.nome10);
+		ritorno = (Button) findViewById(R.id.ritorno);
 	}
 
 	private void creaAttrazioni()
@@ -144,16 +148,6 @@ public class Vids extends Activity {
 			//Log.i("DIM VETTORI: " , " DIM SERIE: " + serieDaMostrare.size() + ";  atr da mostrare: " + attrazioniDaMostrare.size());
 			attrazioniDaMostrare.set(i,serieDaMostrare.get(i));
 		}
-		/*atr1 = serieDaMostrare.get(0);
-		atr2 = serieDaMostrare.get(1);
-		atr3 = serieDaMostrare.get(2);
-		atr4 = serieDaMostrare.get(3);
-		atr5 = serieDaMostrare.get(4);
-		atr6 = serieDaMostrare.get(5);
-		atr7 = serieDaMostrare.get(6);
-		atr8 = serieDaMostrare.get(7);
-		atr9 = serieDaMostrare.get(8);
-		atr10 = serieDaMostrare.get(9);*/
 	}
 
 	private void riempiAttrazioni()
@@ -185,25 +179,36 @@ public class Vids extends Activity {
 	}
 
 
+	/*
+	(String name , String gen, String tec
+            , String desc, double latitude, double longitude, double distance)
+	 */
 	private void scrivi(Attrazioni a)
 	{
-		dbHelper = new GeneralDbAdapter(this);
+		dbHelper = new VisitedDbAdapter(this);
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
+		String name = a.getNome();
+		String gen = a.getGen();
+		String tec = a.getTec();
+		String desc = a.getDesc();
+		String time = now.format2445();
+		dbHelper.createContact(name, gen, tec, desc, time);
 		dbHelper.close();
 	}
 
-
-/*	private OnClickListener toccato =
-		  new OnClickListener()
+	private void setRitorno()
 	{
-	 @Override
-	 public void onClick(View v)
-	 {
-		Intent intent = new Intent(getApplicationContext(), RouteTracker.class);
-		startActivity(intent);
-	 } // end method onClick
-	};*/
+		ritorno.setOnClickListener(
+			new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getApplicationContext(), Preambolo.class);
+					startActivity(intent);
+				}
+			}
+	);
+	}
 
 }

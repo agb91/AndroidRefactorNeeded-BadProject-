@@ -17,16 +17,19 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical"
 		>
-
+		<Button
+			android:id="@+id/ritorno"
+			android:layout_width="wrap_content"
+			android:layout_height="90dp"
+			android:text="GoHome"
+			/>
 
 		<Button
 			android:id="@+id/nome1"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-
+			android:layout_height="90dp"
 			android:text="Button"
 			android:visibility="invisible" />
-		<!---->
 
 		<Button
 			android:id="@+id/nome2"
@@ -100,12 +103,7 @@
 			android:visibility="invisible"
 			/>
 
-		<Button
-			android:id="@+id/ritorno"
-			android:layout_width="wrap_content"
-			android:layout_height="90dp"
-			android:text="Indietro"
-			android:visibility="invisible" />
+
 
 	</TableLayout>
 

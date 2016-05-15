@@ -1152,10 +1152,10 @@ public class GodOfDb {
         Integer num = cursor.getCount();
         if(num<20) {
 
-            a = new Attrazioni(0, 0, "testa", gen12, desc12, tec12, 9990.109999);
-            b = new Attrazioni(0, 0, "testb", gen13, desc12, tec12, 9990.109999);
-            c = new Attrazioni(0, 0, "testc", gen14, desc12, tec12, 9990.109999);
-            d = new Attrazioni(0, 0, "testd", gen15, desc12, tec12, 9990.109999);
+            a = new Attrazioni(0, 0, "testa", "gentestA", "gendescA", "genTECA", 9990.109999);
+            b = new Attrazioni(0, 0, "testb", "gentestB", "gendescB", "genTECB", 9990.109999);
+            c = new Attrazioni(0, 0, "testc", "gentestC", "gendescC", "genTECC", 9990.109999);
+            d = new Attrazioni(0, 0, "testd", "gentestD", "gendescD", "genTECD", 9990.109999);
             Teatro_della_scala = new Attrazioni(45.467409, 9.189519, "Teatro della scala", gen1, desc1, tec1, 0.003494);
             Triennale = new Attrazioni(45.472248, 9.173609, "Triennale", gen2, desc2, tec2, 0.007602);
             San_siro = new Attrazioni(45.478143, 9.123852, "San Siro", gen3, desc3, tec3, 0.006444);
