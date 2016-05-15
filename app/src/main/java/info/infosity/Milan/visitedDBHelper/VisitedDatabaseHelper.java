@@ -13,13 +13,13 @@ public class VisitedDatabaseHelper extends SQLiteOpenHelper {
     // Lo statement SQL di creazione del database
 
     //(45.942907, 10.27775713,"Teatro della scala", gen12,desc12,tec12, 0.009999);
-    private static final String DATABASE_CREATE = "create table contact (" +
+    private static final String DATABASE_CREATE = "create table visited (" +
             "_id integer primary key autoincrement," +
             " name text not null, " +
             " gen text not null, " +
             " desc text not null, " +
             " tec text not null, " +
-            " time text not null "; todo sistema tipo di dato
+            " time text not null); ";
 
     // Costruttore
     public VisitedDatabaseHelper(Context context) {

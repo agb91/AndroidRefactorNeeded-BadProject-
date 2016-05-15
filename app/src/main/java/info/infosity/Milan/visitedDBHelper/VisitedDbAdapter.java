@@ -29,16 +29,14 @@ public class VisitedDbAdapter {
             " longitude real not null) "+
             " distance real not null);";
      */
-    private static final String DATABASE_TABLE = "contact";
+    private static final String DATABASE_TABLE = "visited";
 
     public static final String KEY_CONTACTID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_GEN = "gen";
     public static final String KEY_DESC = "desc";
     public static final String KEY_TEC = "tec";
-    public static final String KEY_LATITUDE = "latitude";
-    public static final String KEY_LONGITUDE = "longitude";
-    public static final String KEY_DISTANCE = "distance";
+    public static final String KEY_TIME = "time";
 
 
     public VisitedDbAdapter(Context context) {
@@ -56,34 +54,29 @@ public class VisitedDbAdapter {
     }
 
 
-   /* public static final String KEY_CONTACTID = "_id";
+   /*     public static final String KEY_CONTACTID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_GEN = "gen";
     public static final String KEY_DESC = "desc";
     public static final String KEY_TEC = "tec";
-    public static final String KEY_LATITUDE = "latitude";
-    public static final String KEY_LONGITUDE = "longitude";
-    public static final String KEY_DISTANCE = "distance";*/
+    public static final String KEY_Time = "time";*/
     private ContentValues createContentValues(String name , String gen, String tec
-            , String desc, double latitude, double longitude, double distance)
+            , String desc, String time)
     {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_GEN, gen);
         values.put(KEY_DESC, desc);
         values.put(KEY_TEC, tec);
-        values.put(KEY_LATITUDE, latitude);
-        values.put(KEY_LONGITUDE, longitude);
-        values.put(KEY_DISTANCE, distance);
+        values.put(KEY_TIME, time);
         return values;
     }
 
     //create a contact
     public long createContact(String name , String gen, String tec
-            , String desc, double latitude, double longitude, double distance)
+            , String desc, String time)
     {
-        ContentValues initialValues = createContentValues(name, gen, tec, desc, latitude,
-                longitude, distance);
+        ContentValues initialValues = createContentValues(name, gen, tec, desc, time);
         return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
     }
 
@@ -101,7 +94,7 @@ public class VisitedDbAdapter {
     //fetch all contacts
     public Cursor fetchAllContacts() {
         return database.query(DATABASE_TABLE, new String[]{KEY_CONTACTID, KEY_NAME, KEY_GEN,
-            KEY_DESC, KEY_TEC, KEY_LATITUDE, KEY_LONGITUDE, KEY_DISTANCE}, null, null, null, null, null);
+            KEY_DESC, KEY_TEC, KEY_TIME}, null, null, null, null, null);
     }
 
     //fetch contacts filter by a string
@@ -109,7 +102,7 @@ public class VisitedDbAdapter {
         Cursor mCursor = database.query(true, DATABASE_TABLE, new String[]
                 {
                         KEY_CONTACTID, KEY_NAME, KEY_GEN,
-                        KEY_DESC, KEY_TEC, KEY_LATITUDE, KEY_LONGITUDE, KEY_DISTANCE
+                        KEY_DESC, KEY_TEC, KEY_TIME
                 },
                 KEY_CONTACTID + " like '%" + id + "%'", null, null, null, null, null);
 

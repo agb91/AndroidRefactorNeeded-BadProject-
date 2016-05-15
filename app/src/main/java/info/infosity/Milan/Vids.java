@@ -195,6 +195,8 @@ public class Vids extends Activity {
 		String desc = a.getDesc();
 		String time = now.format2445();
 		dbHelper.createContact(name, gen, tec, desc, time);
+		int quanti = dbHelper.fetchAllContacts().getCount();
+		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();
 	}
 
