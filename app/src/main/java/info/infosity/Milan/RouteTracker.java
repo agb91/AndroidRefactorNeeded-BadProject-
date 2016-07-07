@@ -124,9 +124,9 @@
 		private double distante (Attrazioni a)
 		{
 			double risp = 0;
-			double cl =a.getLat();
-			double clo =a.getLon();
-			double distanza = a.getDistanza();
+			double cl =a.getDistanceEw();
+			double clo =a.getLat1();
+			double distanza = a.getDistanceEw();
 			double distLa= Math.abs(l - cl);
 			double distLo= Math.abs(lo - clo);
 			Double tot = distLa + distLo;
@@ -189,7 +189,7 @@
 			        Attrazioni questa = (Attrazioni) serie.get(i);
 			        double distante = distante(questa);
 
-                    boolean vicina = vicina(distante, questa.getDistanza());
+                    boolean vicina = vicina(distante, questa.getDistanceEw());
                     boolean orientata = orientata(); //TODO
 			        if(vicina && orientata){
 						Log.i("AVVISO","DENTRO: " + serie.size());

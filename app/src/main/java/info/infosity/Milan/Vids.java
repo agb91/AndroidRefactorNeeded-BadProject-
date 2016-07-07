@@ -70,14 +70,14 @@ public class Vids extends Activity {
 			for (int i = 0; i < quanti; i++) {
 				final int valore = i;
 				Attrazioni questa = serieDaMostrare.get(i);
-				vettoreBottoni.get(i).setText(questa.getNome());
+				vettoreBottoni.get(i).setText(questa.getName());
 				vettoreBottoni.get(i).setVisibility(View.VISIBLE);
 				vettoreBottoni.get(i).setOnClickListener(
 						new OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								scrivi(attrazioniDaMostrare.get(valore));
-								nomeattrazione = attrazioniDaMostrare.get(valore).getNome();
+								nomeattrazione = attrazioniDaMostrare.get(valore).getName();
 								numVettoreAttrazione = valore;
 								Intent intent = new Intent(getApplicationContext(), Atr.class);
 								startActivity(intent);
@@ -189,12 +189,12 @@ public class Vids extends Activity {
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
-		String name = a.getNome();
-		String gen = a.getGen();
-		String tec = a.getTec();
-		String desc = a.getDesc();
+		String name = a.getName();
+		String gen = a.getAddress();
+		String tec = a.getClosed();
+		String desc = a.getCollections();
 		String time = now.format2445();
-		dbHelper.createContact(name, gen, tec, desc, time);
+		dbHelper.createContact(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"a","a","a","a","a","a","a","a","a","a","a");
 		int quanti = dbHelper.fetchAllContacts().getCount();
 		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();

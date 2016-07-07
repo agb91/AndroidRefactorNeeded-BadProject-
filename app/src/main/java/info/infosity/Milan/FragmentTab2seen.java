@@ -17,7 +17,7 @@ public class FragmentTab2seen extends Fragment {
         testo = (EditText) rootView.findViewById(R.id.testoTab2);
         int pos=Vids.numVettoreAttrazione;
         Attrazioni attuale=AtrSeen.questa;
-        String generale=attuale.getDesc();
+        String generale="todo";//attuale.getTec()
         testo.setText(Html.fromHtml(generale));
         testo.setKeyListener(null);
         testo.setFocusable(false);

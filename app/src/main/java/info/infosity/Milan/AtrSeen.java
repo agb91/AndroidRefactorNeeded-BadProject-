@@ -25,7 +25,7 @@ public class AtrSeen extends Activity {
         Attrazioni ris = pagliaio.get(0);
         for (int i=0; i<pagliaio.size(); i++)
         {
-            if(pagliaio.get(i).getNome().equalsIgnoreCase(ago))
+            if(pagliaio.get(i).getName().equalsIgnoreCase(ago))
             {
 
                 ris = pagliaio.get(i);
