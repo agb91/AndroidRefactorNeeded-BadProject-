@@ -29,33 +29,15 @@ public class GodOfDb {
         dbHelper = new GeneralDbAdapter(context);
         dbHelper.open();
 
-        Cursor cursor = dbHelper.fetchAllContacts();
-
-        Integer num = cursor.getCount();
-
         serie = getSerie(context);
-
-        cursor = dbHelper.fetchAllContacts();
-        num = cursor.getCount();
-
-        //dbHelper.close();
-
     }
 
 
     public Vector<Attrazioni> getSerie(Context context)
     {
 
-        Cursor cursor = dbHelper.fetchAllContacts();
-
-    /*final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-    builder.setMessage("contact: " + cursor.getCount())
-            .setCancelable(true);
-    final AlertDialog alert = builder.create();
-    alert.show();*/
-
-
-        Integer num = cursor.getCount();
+        Vector<Attrazioni> atrs= dbHelper.fetchAllContactsByObjects();
+        Integer num = atrs.size();
         if(num<20) {
             double latitude = 52.359998;
             double longitude = 4.885315;
@@ -145,57 +127,10 @@ public class GodOfDb {
             dbHelper.createContact(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history);
 
         }
-        cursor = dbHelper.fetchAllContacts();
+        atrs = dbHelper.fetchAllContactsByObjects();
 
         Vector<Attrazioni> risp = new Vector<Attrazioni>();
-        cursor.moveToFirst();
-        do
-        {
-            double latitude = cursor.getDouble(0);
-            double longitude = cursor.getDouble(1);
-            double distanceNs = cursor.getDouble(2);
-            double distanceEw = cursor.getDouble(3);
-            double lat1 = cursor.getDouble(4);
-            double long1 = cursor.getDouble(5);
-            double lat2 = cursor.getDouble(6);
-            double long2 = cursor.getDouble(7);
-            double lat3 = cursor.getDouble(8);
-            double long3 = cursor.getDouble(9);
-            double lat4 = cursor.getDouble(10);
-            double long4 = cursor.getDouble(11);
-            double lat5 = cursor.getDouble(12);
-            double long5 = cursor.getDouble(13);
-            double lat6 = cursor.getDouble(14);
-            double long6 = cursor.getDouble(15);
-            double lat7 = cursor.getDouble(16);
-            double long7 = cursor.getDouble(17);
-            double lat8 = cursor.getDouble(18);
-            double long8 = cursor.getDouble(19);
-            double lat9 = cursor.getDouble(20);
-            double long9 = cursor.getDouble(21);
-            double lat10 = cursor.getDouble(22);
-            double long10 = cursor.getDouble(23);
-            double lat11 = cursor.getDouble(24);
-            double long11 = cursor.getDouble(25);
-            double lat12 = cursor.getDouble(26);
-            double long12 = cursor.getDouble(27);
-            String name = cursor.getString(28);
-            String type = cursor.getString(29);
-            String collections = cursor.getString(30);
-            String address = cursor.getString(31);
-            String phone = cursor.getString(32);
-            String opening = cursor.getString(33);
-            String closed = cursor.getString(34);
-            String price = cursor.getString(35);
-            String getHere = cursor.getString(36);
-            String description = cursor.getString(37);
-            String history =cursor.getString(38);
-
-            Attrazioni a = new Attrazioni(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history);
-            risp.add(a);
-            cursor.moveToNext();
-        }while(cursor.isAfterLast() == false);
-
+        risp.addAll(atrs);
         return risp;
     }
 

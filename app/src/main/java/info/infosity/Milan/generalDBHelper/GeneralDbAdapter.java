@@ -35,52 +35,54 @@ public class GeneralDbAdapter {
 
     private static final String DATABASE_TABLE = "contact";
 
-    public static final String KEY_NAME = "name";
-    public static final String KEY_LATITUDE = "latitude";
-    public static final String KEY_LONGITUDE = "longitude";
-    public static final String KEY_DISTANCESNS = "distanceNs";
-    public static final String KEY_DISTANCESEW= "distanceEw";
-    public static final String KEY_LAT1= "lat1";
-    public static final String KEY_LAT2= "lat2";
-    public static final String KEY_LAT3= "lat3";
-    public static final String KEY_LAT4= "lat4";
-    public static final String KEY_LAT5= "lat5";
-    public static final String KEY_LAT6= "lat6";
-    public static final String KEY_LAT7= "lat7";
-    public static final String KEY_LAT8= "lat8";
-    public static final String KEY_LAT9= "lat9";
-    public static final String KEY_LAT10= "lat10";
-    public static final String KEY_LAT11= "lat11";
-    public static final String KEY_LAT12= "lat12";
-    public static final String KEY_LONG1= "long1";
-    public static final String KEY_LONG2= "long2";
-    public static final String KEY_LONG3= "long3";
-    public static final String KEY_LONG4= "long4";
-    public static final String   KEY_LONG5= "long5";
-    public static final String KEY_LONG6= "long6";
-    public static final String   KEY_LONG7= "long7";
-    public static final String KEY_LONG8= "long8";
-    public static final String   KEY_LONG9= "long9";
-    public static final String   KEY_LONG10= "long10";
-    public static final String KEY_LONG11= "long11";
-    public static final String  KEY_LONG12= "long12";
-    public static final String KEY_TYPE= "type";
-    public static final String KEY_COLLECTIONS= "collections";
-    public static final String  KEY_ADDRESS= "address";
-    public static final String KEY_PHONE= "phone";
-    public static final String KEY_OPENING= "opening";
-    public static final String KEY_CLOSED= "closed";
-    public static final String KEY_PRICE= "price";
-    public static final String KEY_GETHERE= "getHere";
-    public static final String KEY_DESCRIPTION= "description";
-    public static final String KEY_HISTORY= "history";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_LATITUDE = "latitude";
+    private static final String KEY_LONGITUDE = "longitude";
+    private static final String KEY_DISTANCESNS = "distanceNs";
+    private static final String KEY_DISTANCESEW= "distanceEw";
+    private static final String KEY_LAT1= "lat1";
+    private static final String KEY_LAT2= "lat2";
+    private static final String KEY_LAT3= "lat3";
+    private static final String KEY_LAT4= "lat4";
+    private static final String KEY_LAT5= "lat5";
+    private static final String KEY_LAT6= "lat6";
+    private static final String KEY_LAT7= "lat7";
+    private static final String KEY_LAT8= "lat8";
+    private static final String KEY_LAT9= "lat9";
+    private static final String KEY_LAT10= "lat10";
+    private static final String KEY_LAT11= "lat11";
+    private static final String KEY_LAT12= "lat12";
+    private static final String KEY_LONG1= "long1";
+    private static final String KEY_LONG2= "long2";
+    private static final String KEY_LONG3= "long3";
+    private static final String KEY_LONG4= "long4";
+    private static final String   KEY_LONG5= "long5";
+    private static final String KEY_LONG6= "long6";
+    private static final String   KEY_LONG7= "long7";
+    private static final String KEY_LONG8= "long8";
+    private static final String   KEY_LONG9= "long9";
+    private static final String   KEY_LONG10= "long10";
+    private static final String KEY_LONG11= "long11";
+    private static final String  KEY_LONG12= "long12";
+    private static final String KEY_TYPE= "type";
+    private static final String KEY_COLLECTIONS= "collections";
+    private static final String  KEY_ADDRESS= "address";
+    private static final String KEY_PHONE= "phone";
+    private static final String KEY_OPENING= "opening";
+    private static final String KEY_CLOSED= "closed";
+    private static final String KEY_PRICE= "price";
+    private static final String KEY_GETHERE= "getHere";
+    private static final String KEY_DESCRIPTION= "description";
+    private static final String KEY_HISTORY= "history";
 
 
-    public GeneralDbAdapter(Context context) {
+    public GeneralDbAdapter(Context context)
+    {
         this.context = context;
     }
 
-    public GeneralDbAdapter open() throws SQLException {
+    public GeneralDbAdapter open() throws SQLException
+    {
         dbHelper = new GeneralDatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
@@ -97,7 +99,6 @@ public class GeneralDbAdapter {
                                               double long12, String name, String type,String  collections, String address, String phone,
                                               String opening, String closed, String price, String getHere, String description,String  history)
     {
-
         ContentValues values = new ContentValues();
         values.put(KEY_LATITUDE, latitude);
         values.put(KEY_LONGITUDE, longitude);
@@ -154,7 +155,7 @@ public class GeneralDbAdapter {
     }
 
     //fetch all contacts
-    public Cursor fetchAllContacts() {
+    private Cursor fetchAllContacts() {
         return database.query(DATABASE_TABLE, new String[]{KEY_LATITUDE, KEY_LONGITUDE,KEY_DISTANCESNS,KEY_DISTANCESEW,KEY_LAT1,KEY_LAT2, KEY_LAT3,KEY_LAT4,KEY_LAT5, KEY_LAT6, KEY_LAT7, KEY_LAT8,KEY_LAT9, KEY_LAT10, KEY_LAT11,KEY_LAT12, KEY_LONG1,KEY_LONG2, KEY_LONG3, KEY_LONG4,KEY_LONG5, KEY_LONG6, KEY_LONG7, KEY_LONG8,KEY_LONG9, KEY_LONG10, KEY_LONG11, KEY_LONG12, KEY_NAME, KEY_TYPE, KEY_COLLECTIONS,KEY_ADDRESS, KEY_PHONE, KEY_OPENING, KEY_CLOSED, KEY_PRICE, KEY_GETHERE, KEY_DESCRIPTION,KEY_HISTORY}, null, null, null, null, null);
     }
 
@@ -182,16 +183,4 @@ public class GeneralDbAdapter {
         }
         return risp;
     }
-
-    //fetch contacts filter by a string
-    /*public Cursor fetchContactsByFilter(String id) {
-        Cursor mCursor = database.query(true, DATABASE_TABLE, new String[]
-                {
-                        KEY_CONTACTID, KEY_NAME, KEY_GEN,
-                        KEY_DESC, KEY_TEC, KEY_LATITUDE, KEY_LONGITUDE, KEY_DISTANCE
-                },
-                KEY_CONTACTID + " like '%" + id + "%'", null, null, null, null, null);
-
-        return mCursor;
-    }*/
 }

@@ -16,7 +16,6 @@ import android.content.Intent;
 import java.util.Vector;
 
 import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
-import info.infosity.Milan.visitedDBHelper.VisitedDbAdapter;
 
 public class Vids extends Activity {
 
@@ -33,7 +32,7 @@ public class Vids extends Activity {
 	private Button ritorno;
 	private Vector<Button> vettoreBottoni;
 	private Vector<Attrazioni> serieDaMostrare;
-	private VisitedDbAdapter dbHelper;
+	private GeneralDbAdapter dbHelper;
 	private Cursor cursor;
 	private Attrazioni atr1;
 	private Attrazioni atr2;
@@ -185,7 +184,7 @@ public class Vids extends Activity {
 	 */
 	private void scrivi(Attrazioni a)
 	{
-		dbHelper = new VisitedDbAdapter(this);
+		dbHelper = new GeneralDbAdapter(this);
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
@@ -195,7 +194,7 @@ public class Vids extends Activity {
 		String desc = a.getCollections();
 		String time = now.format2445();
 		dbHelper.createContact(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"a","a","a","a","a","a","a","a","a","a","a");
-		int quanti = dbHelper.fetchAllContacts().getCount();
+		int quanti = dbHelper.fetchAllContactsByObjects().size();
 		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();
 	}

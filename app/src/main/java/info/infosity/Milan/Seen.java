@@ -30,7 +30,8 @@ public class Seen extends Activity {
 
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+        {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.menuseen);
@@ -44,42 +45,23 @@ public class Seen extends Activity {
           //  dbHelper.createContact("primo","1-1-1");
           //  dbHelper.createContact("secondo","2 ginevro");
 
-            // QUESTO DB È MOLTO LUNGO PERCHÈ AD OGNI PROVA MI AH AGGIUNTO PEZZI!!!!
-            cursor = dbHelper.fetchAllContacts();
-            dbHelper.fetchAllContactsByObjects();
-            Integer num = cursor.getCount();
+            Vector<Attrazioni> readed = dbHelper.fetchAllContactsByObjects();
+            Integer num = readed.size();
+            //Log.wtf("num", "wtf before: " + String.valueOf(num));
 
-            //Log.wtf("num", "wtf: " + String.valueOf(num));
-
-            if(cursor.getCount()==0){//se è vuoto caccia dentro qualcosa
-               // dbHelper.createContact("primo","1-1-1");
-                //dbHelper.createContact("secondo","2 ginevro");
-            }
-            cursor.moveToLast();
-
-            Vector<String> pezziGiaMessi = new Vector<String>();
-            String pezzo= "";
-            for (int i=1; i<num-1; i++)
+            Vector<String> alreadyInsertedPieces = new Vector<String>();
+            for (int i=0; i<readed.size(); i++)
             {
-                pezzo = "";
+                Attrazioni piece = readed.get(i);
   //              pezzo += + i+" : ";
-                pezzo += (String) cursor.getString(28);
-                /*if(i==1) {//just to remember how is build an attraction object and where is the name
-                    Log.wtf("num", "c28: " + String.valueOf(cursor.getString(28)));
-                    Log.wtf("num", "c29: " + String.valueOf(cursor.getString(29)));
-                }*/
-                 cursor.moveToPosition(num - 1 - i);
-                 cursor.moveToPosition(num - 1 - i);
-                //pezzo += "<br><br>";
+                String pieceName = piece.getName();
 
-                if(!inVettore(pezzo,pezziGiaMessi)) {
-
-                    //ora genero dinamicamente un bottone
+                if(!inVector(pieceName,alreadyInsertedPieces))
+                {
                     Button btn = new Button(this);
                     btn.setId(i);
                     btn.setBackground(this.getResources().getDrawable(R.drawable.bottonigiaviste));
-                    btn.setText(pezzo);
-                    //btn.setBackgroundColor(Color.rgb(70, 80, 90));
+                    btn.setText(pieceName);
                     linear.addView(btn);
                     Vector<Attrazioni> atr = Globals.getSerie();
                     btn.setOnClickListener(new View.OnClickListener() {
@@ -93,37 +75,25 @@ public class Seen extends Activity {
                         }
                     });
                 }
-                pezziGiaMessi.add(pezzo);
+                alreadyInsertedPieces.add(pieceName);
             }
-
-            Integer numPGM = pezziGiaMessi.size();
-            //Log.wtf("num", "wtf: " + String.valueOf(numPGM));
-
-
-            cursor.close();
-
             dbHelper.close();
-
-           // linear.setVerticalScrollBarEnabled(true);
-            //linear.setScrollContainer(true);
-
-
         }
 
 
 
-    private boolean inVettore(String ago, Vector<String> pagliaio)
-    {
-        boolean ris = false;
-        for(int i = 0; i<pagliaio.size(); i++)
+        private boolean inVector(String ago, Vector<String> pagliaio)
         {
-            if(ago.equalsIgnoreCase(pagliaio.get(i)))
+            boolean ris = false;
+            for(int i = 0; i<pagliaio.size(); i++)
             {
-                ris = true;
+                if(ago.equalsIgnoreCase(pagliaio.get(i)))
+                {
+                    ris = true;
+                }
             }
+            return ris;
         }
-        return ris;
-    }
 
 
 }
