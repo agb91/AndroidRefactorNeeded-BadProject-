@@ -73,7 +73,6 @@ public class Seen extends Activity {
         }
 
 
-
         private boolean inVector(String ago, Vector<String> pagliaio)
         {
             boolean ris = false;

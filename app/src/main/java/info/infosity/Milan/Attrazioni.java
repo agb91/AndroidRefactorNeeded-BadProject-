@@ -247,6 +247,7 @@ public class Attrazioni extends Activity implements Comparable<Attrazioni> {
 		return long12;
 	}
 	public String getVisited() { return visited; }
+	public void setVisited(String s) { visited = s; }
 
 
 

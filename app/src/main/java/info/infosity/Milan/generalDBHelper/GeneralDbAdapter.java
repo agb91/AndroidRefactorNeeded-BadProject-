@@ -144,7 +144,7 @@ public class GeneralDbAdapter {
         return values;
     }
 
-    //create a contact
+    //create an attraction
     public long createContact( double latitude, double longitude, double distanceNs, double distanceEw, double lat1, double long1,
                                double lat2, double long2, double lat3, double long3, double lat4, double long4, double lat5,
                                double long5, double lat6, double long6, double lat7, double long7, double lat8, double long8,
@@ -154,6 +154,18 @@ public class GeneralDbAdapter {
     {
         ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
         return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
+    }
+
+    //modify an attraction
+    public long updateContact( double latitude, double longitude, double distanceNs, double distanceEw, double lat1, double long1,
+                               double lat2, double long2, double lat3, double long3, double lat4, double long4, double lat5,
+                               double long5, double lat6, double long6, double lat7, double long7, double lat8, double long8,
+                               double lat9, double long9, double lat10, double long10, double lat11, double long11, double lat12,
+                               double long12, String name, String type,String  collections, String address, String phone,
+                               String opening, String closed, String price, String getHere, String description,String  history, String visited)
+    {
+        ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
+        return database.update(DATABASE_TABLE, initialValues, KEY_NAME+"="+name, null);
     }
 
     //fetch all contacts

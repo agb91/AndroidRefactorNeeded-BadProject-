@@ -189,11 +189,17 @@ public class Vids extends Activity {
 		Time now = new Time();
 		now.setToNow();
 		String name = a.getName();
-		String gen = a.getAddress();
-		String tec = a.getClosed();
-		String desc = a.getCollections();
 		String time = now.format2445();
-		dbHelper.createContact(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"a","a","a","a","a","a","a","a","a","a","a", "no");
+		a.setVisited("yes");
+		TO TEST
+		dbHelper.updateContact( a.getLatitude(), a.getLongitude(), a.getDistanceNs(), a.getDistanceEw(),a.getLat1(),a.getLong1(),
+			a.getLat2(), a.getLong2(), a.getLat3(), a.getLong3(), a.getLat4(), a.getLong4(), a.getLat5(),
+			a.getLong5(), a.getLat6(), a.getLong6(), a.getLat7(), a.getLong7(), a.getLat8(), a.getLong8(),
+			a.getLat9(), a.getLong9(), a.getLat10(), a.getLong10(), a.getLat11(),a.getLong11(), a.getLat12(),
+			a.getLong12(), a.getName(), a.getType(),a.getCollections(), a.getAddress(), a.getPhone(),
+			a.getOpening(), a.getClosed(), a.getPrice(), a.getGetHere(), a.getDescription(),a.getHistory(),a.getVisited() );
+
+
 		int quanti = dbHelper.fetchAllContactsByObjects().size();
 		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();

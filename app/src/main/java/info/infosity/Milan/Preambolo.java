@@ -22,15 +22,11 @@ public class Preambolo extends Activity {
     ImageButton seen;
     ImageButton info;
 
-
-//    private static RouteTracker appoggio = new RouteTracker();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.menu20);
-
         Globals.create(this);
 
         search = (ImageButton) findViewById(R.id.imageButton2);
