@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Button;
@@ -45,7 +46,10 @@ public class Seen extends Activity {
 
             // QUESTO DB È MOLTO LUNGO PERCHÈ AD OGNI PROVA MI AH AGGIUNTO PEZZI!!!!
             cursor = dbHelper.fetchAllContacts();
+            dbHelper.fetchAllContactsByObjects();
             Integer num = cursor.getCount();
+
+            //Log.wtf("num", "wtf: " + String.valueOf(num));
 
             if(cursor.getCount()==0){//se è vuoto caccia dentro qualcosa
                // dbHelper.createContact("primo","1-1-1");
@@ -59,16 +63,13 @@ public class Seen extends Activity {
             {
                 pezzo = "";
   //              pezzo += + i+" : ";
-                pezzo += (String) cursor.getString(1);
- //               String data = (String) cursor.getString(2);
-  //              try {
- //                   String anno = data.substring(0, 4);
-  //                  String mese = data.substring(4, 6);
-   //                 String giorno = data.substring(6, 8);
-    //                pezzo += "; " + giorno + "-" + mese + "-" + anno + ";";
-    //            }catch(Exception e){
-    //            }
-                cursor.moveToPosition(num - 1 - i);
+                pezzo += (String) cursor.getString(28);
+                /*if(i==1) {//just to remember how is build an attraction object and where is the name
+                    Log.wtf("num", "c28: " + String.valueOf(cursor.getString(28)));
+                    Log.wtf("num", "c29: " + String.valueOf(cursor.getString(29)));
+                }*/
+                 cursor.moveToPosition(num - 1 - i);
+                 cursor.moveToPosition(num - 1 - i);
                 //pezzo += "<br><br>";
 
                 if(!inVettore(pezzo,pezziGiaMessi)) {
@@ -94,6 +95,10 @@ public class Seen extends Activity {
                 }
                 pezziGiaMessi.add(pezzo);
             }
+
+            Integer numPGM = pezziGiaMessi.size();
+            //Log.wtf("num", "wtf: " + String.valueOf(numPGM));
+
 
             cursor.close();
 

@@ -4,10 +4,20 @@ package info.infosity.Milan.generalDBHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import java.util.Vector;
+
+import info.infosity.Milan.AtrSeen;
+import info.infosity.Milan.Attrazioni;
+import info.infosity.Milan.Global.Globals;
+import info.infosity.Milan.R;
 import info.infosity.Milan.generalDBHelper.*;
 
 public class GeneralDbAdapter {
@@ -18,6 +28,8 @@ public class GeneralDbAdapter {
     private Context context;
     private SQLiteDatabase database;
     private GeneralDatabaseHelper dbHelper;
+
+    private Cursor cursor;
 
     // Database fields
 
@@ -144,6 +156,31 @@ public class GeneralDbAdapter {
     //fetch all contacts
     public Cursor fetchAllContacts() {
         return database.query(DATABASE_TABLE, new String[]{KEY_LATITUDE, KEY_LONGITUDE,KEY_DISTANCESNS,KEY_DISTANCESEW,KEY_LAT1,KEY_LAT2, KEY_LAT3,KEY_LAT4,KEY_LAT5, KEY_LAT6, KEY_LAT7, KEY_LAT8,KEY_LAT9, KEY_LAT10, KEY_LAT11,KEY_LAT12, KEY_LONG1,KEY_LONG2, KEY_LONG3, KEY_LONG4,KEY_LONG5, KEY_LONG6, KEY_LONG7, KEY_LONG8,KEY_LONG9, KEY_LONG10, KEY_LONG11, KEY_LONG12, KEY_NAME, KEY_TYPE, KEY_COLLECTIONS,KEY_ADDRESS, KEY_PHONE, KEY_OPENING, KEY_CLOSED, KEY_PRICE, KEY_GETHERE, KEY_DESCRIPTION,KEY_HISTORY}, null, null, null, null, null);
+    }
+
+    public Vector<Attrazioni> fetchAllContactsByObjects()
+    {
+        cursor = fetchAllContacts();
+        Integer num = cursor.getCount();
+        //Log.wtf("count cursor", "count cursor" + String.valueOf(num));
+        cursor.moveToLast();
+        Vector<Attrazioni> risp = new Vector<Attrazioni>();
+        for (int i=1; i<num-1; i++)
+        {
+            Attrazioni atr = new Attrazioni( cursor.getDouble(0), cursor.getDouble(1), cursor.getDouble(2),
+                    cursor.getDouble(3), cursor.getDouble(4), cursor.getDouble(5), cursor.getDouble(6), cursor.getDouble(7),
+                    cursor.getDouble(8), cursor.getDouble(9), cursor.getDouble(10), cursor.getDouble(11), cursor.getDouble(12),
+                    cursor.getDouble(13), cursor.getDouble(14), cursor.getDouble(15), cursor.getDouble(16), cursor.getDouble(17),
+                    cursor.getDouble(18), cursor.getDouble(19), cursor.getDouble(20), cursor.getDouble(21), cursor.getDouble(22),
+                    cursor.getDouble(23), cursor.getDouble(24), cursor.getDouble(25), cursor.getDouble(26), cursor.getDouble(27),
+                    cursor.getString(28), cursor.getString(29), cursor.getString(30), cursor.getString(31), cursor.getString(32),
+                    cursor.getString(33), cursor.getString(34), cursor.getString(35), cursor.getString(36), cursor.getString(37),
+                    cursor.getString(38) );
+            
+            cursor.moveToPosition(num - 1 - i);
+            risp.add(atr);
+        }
+        return risp;
     }
 
     //fetch contacts filter by a string
