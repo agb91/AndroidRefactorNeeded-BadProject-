@@ -74,6 +74,7 @@ public class GeneralDbAdapter {
     private static final String KEY_GETHERE= "getHere";
     private static final String KEY_DESCRIPTION= "description";
     private static final String KEY_HISTORY= "history";
+    private static final String KEY_VISITED= "visited";
 
 
     public GeneralDbAdapter(Context context)
@@ -97,7 +98,7 @@ public class GeneralDbAdapter {
                                               double long5, double lat6, double long6, double lat7, double long7, double lat8, double long8,
                                               double lat9, double long9, double lat10, double long10, double lat11, double long11, double lat12,
                                               double long12, String name, String type,String  collections, String address, String phone,
-                                              String opening, String closed, String price, String getHere, String description,String  history)
+                                              String opening, String closed, String price, String getHere, String description,String  history, String visited)
     {
         ContentValues values = new ContentValues();
         values.put(KEY_LATITUDE, latitude);
@@ -139,6 +140,7 @@ public class GeneralDbAdapter {
         values.put(KEY_GETHERE, getHere);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_HISTORY, history);
+        values.put(KEY_VISITED, visited);
         return values;
     }
 
@@ -148,15 +150,15 @@ public class GeneralDbAdapter {
                                double long5, double lat6, double long6, double lat7, double long7, double lat8, double long8,
                                double lat9, double long9, double lat10, double long10, double lat11, double long11, double lat12,
                                double long12, String name, String type,String  collections, String address, String phone,
-                               String opening, String closed, String price, String getHere, String description,String  history)
+                               String opening, String closed, String price, String getHere, String description,String  history, String visited)
     {
-        ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history);
+        ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
         return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
     }
 
     //fetch all contacts
     private Cursor fetchAllContacts() {
-        return database.query(DATABASE_TABLE, new String[]{KEY_LATITUDE, KEY_LONGITUDE,KEY_DISTANCESNS,KEY_DISTANCESEW,KEY_LAT1,KEY_LAT2, KEY_LAT3,KEY_LAT4,KEY_LAT5, KEY_LAT6, KEY_LAT7, KEY_LAT8,KEY_LAT9, KEY_LAT10, KEY_LAT11,KEY_LAT12, KEY_LONG1,KEY_LONG2, KEY_LONG3, KEY_LONG4,KEY_LONG5, KEY_LONG6, KEY_LONG7, KEY_LONG8,KEY_LONG9, KEY_LONG10, KEY_LONG11, KEY_LONG12, KEY_NAME, KEY_TYPE, KEY_COLLECTIONS,KEY_ADDRESS, KEY_PHONE, KEY_OPENING, KEY_CLOSED, KEY_PRICE, KEY_GETHERE, KEY_DESCRIPTION,KEY_HISTORY}, null, null, null, null, null);
+        return database.query(DATABASE_TABLE, new String[]{KEY_LATITUDE, KEY_LONGITUDE,KEY_DISTANCESNS,KEY_DISTANCESEW,KEY_LAT1,KEY_LAT2, KEY_LAT3,KEY_LAT4,KEY_LAT5, KEY_LAT6, KEY_LAT7, KEY_LAT8,KEY_LAT9, KEY_LAT10, KEY_LAT11,KEY_LAT12, KEY_LONG1,KEY_LONG2, KEY_LONG3, KEY_LONG4,KEY_LONG5, KEY_LONG6, KEY_LONG7, KEY_LONG8,KEY_LONG9, KEY_LONG10, KEY_LONG11, KEY_LONG12, KEY_NAME, KEY_TYPE, KEY_COLLECTIONS,KEY_ADDRESS, KEY_PHONE, KEY_OPENING, KEY_CLOSED, KEY_PRICE, KEY_GETHERE, KEY_DESCRIPTION,KEY_HISTORY, KEY_VISITED}, null, null, null, null, null);
     }
 
     public Vector<Attrazioni> fetchAllContactsByObjects()
@@ -176,7 +178,7 @@ public class GeneralDbAdapter {
                     cursor.getDouble(23), cursor.getDouble(24), cursor.getDouble(25), cursor.getDouble(26), cursor.getDouble(27),
                     cursor.getString(28), cursor.getString(29), cursor.getString(30), cursor.getString(31), cursor.getString(32),
                     cursor.getString(33), cursor.getString(34), cursor.getString(35), cursor.getString(36), cursor.getString(37),
-                    cursor.getString(38) );
+                    cursor.getString(38), cursor.getString(39) );
             
             cursor.moveToPosition(num - 1 - i);
             risp.add(atr);

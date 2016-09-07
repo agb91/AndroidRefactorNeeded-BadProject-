@@ -193,7 +193,7 @@ public class Vids extends Activity {
 		String tec = a.getClosed();
 		String desc = a.getCollections();
 		String time = now.format2445();
-		dbHelper.createContact(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"a","a","a","a","a","a","a","a","a","a","a");
+		dbHelper.createContact(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"a","a","a","a","a","a","a","a","a","a","a", "no");
 		int quanti = dbHelper.fetchAllContactsByObjects().size();
 		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();

@@ -81,7 +81,8 @@ public class GodOfDb {
             String history = "The Rijksmuseum opened in 1800. Originally it was named 'Nationale Kunstgalerij' and was housed in Huis ten Bosch in The Hague. The museum exhibited around 200 paintings and historic objects from the remains of the viceregal collections and other state institutions.<br>The collections were moved to Amsterdam in 1808. The objects were housed in the Royal Palace in Dam Square. Here, some of the citys foremost paintings, including the Night Watch by Rembrandt were added to the collection.. In 1809, the Koninklijk Museum opened its doors on the top floor of the palace.<br>In 1813, the collection relocated to the Trippenhuis. Unfortunately, this new location was unsuitable as a museum. In 1876, the construction for a new building begun. The official opening took place in 1885.<br>Almost all the paintings belonging to the city of Amsterdam were hung in the Rijksmuseum along with the original collection. The collection of 19th-century art from Haarlem was also added to the museums collection.<br>"
                 +" Over the years, the museum underwent many changes. Between 1904 and 1916, more rooms were added to the building in order to house the collection of 19th-century paintings donated to the museum by Mr and Mrs Drucker-Fraser.<br>During the 1950s,  the Association of Friends of Asian Art donated a collection of asian objects.";
 
-            dbHelper.createContact(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history);
+            String visited = "yes";
+            dbHelper.createContact(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
 
             latitude = 52.375218;
             longitude = 4.883955;
@@ -123,8 +124,8 @@ public class GodOfDb {
             getHere = "<i>Tram</i><br>13, 14, 17: Westermarkt tram stop<br><i>Bus</i><br>170, 172, 174: Westermarkt bus stop";
             description = "With 1.2 million visitors, the Anne Frank House is the third most visited museum in the Netherlands, after the Rijksmuseum and Van Gogh Museum.";
             history = "In 1957, Otto Frank and Johannes Kleiman created the Anne Frank foundation in order to purchase and restore the building. The building was donated to the foundation by the owner. With the money raised, the Anne Frank foundation bought the house next door (number 256).<br>The Anne Frank House opened in 1960. In its first year, the building attracted over 9,000 visitors. Over the years, the number of visitors grew so much that the building has to be closed for renovation.<br>The house closed temporarly in 1970 and in 1999. In 2001,  Queen Beatrix of the Netherlands reopened the museum. Today the Anne Fran House incorporates the entire building between exhibition spaces, a bookshop and a cafe.";
-
-            dbHelper.createContact(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history);
+            visited = "yes";
+            dbHelper.createContact(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
 
         }
         atrs = dbHelper.fetchAllContactsByObjects();

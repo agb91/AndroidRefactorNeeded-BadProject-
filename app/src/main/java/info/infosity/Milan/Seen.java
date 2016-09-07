@@ -35,28 +35,20 @@ public class Seen extends Activity {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.menuseen);
-
             LinearLayout linear = (LinearLayout) findViewById(R.id.lin);
-
-
 
             dbHelper = new GeneralDbAdapter(this);
             dbHelper.open();
-          //  dbHelper.createContact("primo","1-1-1");
-          //  dbHelper.createContact("secondo","2 ginevro");
-
             Vector<Attrazioni> readed = dbHelper.fetchAllContactsByObjects();
             Integer num = readed.size();
             //Log.wtf("num", "wtf before: " + String.valueOf(num));
-
             Vector<String> alreadyInsertedPieces = new Vector<String>();
             for (int i=0; i<readed.size(); i++)
             {
                 Attrazioni piece = readed.get(i);
-  //              pezzo += + i+" : ";
                 String pieceName = piece.getName();
-
-                if(!inVector(pieceName,alreadyInsertedPieces))
+                String visited = piece.getVisited();
+                if( !inVector(pieceName,alreadyInsertedPieces) && visited.equalsIgnoreCase("yes") )
                 {
                     Button btn = new Button(this);
                     btn.setId(i);

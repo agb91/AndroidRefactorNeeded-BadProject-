@@ -52,7 +52,8 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             "price text not null, " +
             "getHere text not null, " +
             "description text not null, " +
-            "history text not null);";
+            "history text not null," +
+            "visited text not null);";
 
     // Costruttore
     public GeneralDatabaseHelper(Context context) {
