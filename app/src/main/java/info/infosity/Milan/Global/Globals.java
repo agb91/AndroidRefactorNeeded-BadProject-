@@ -26,6 +26,8 @@ public class Globals {
 
     public static Vector<Attrazioni> getSerie()
     {
+        //Log.wtf("alive here" , "alive here");
+        serie = god.getSerie(context);
         return serie;
     }
 

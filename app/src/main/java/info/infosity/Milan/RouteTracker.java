@@ -100,7 +100,9 @@
 			super.onStart();
 			ottenuteserie = new Vector<Attrazioni>();
 			ottenuteserie.clear();
+
 			serie = Globals.getSerie();
+			//Log.wtf("from globals i take a serie having length: :", "from globals i take a serie having length: :" + serie.size() );
 
 			Criteria criteria = new Criteria();
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -156,7 +158,7 @@
 			//scrivi(questa);
             cont++;
             questa.setScarto(distante);
-
+			//Log.wtf("alive", "alive");
             ottenuteserie.add(questa);
 			//Log.i("VICIANNZA", "VICINANZA!!, dim: " + ottenuteserie.size());
 
@@ -183,7 +185,7 @@
 			    int niente =1;
 			    int ripetizione=0;
 			    cont =0;
-
+				//Log.wtf("all the attraction: " , "cardinality of all the attraction:" + serie.size() );
 		    	for(int i=0;i<serie.size();i++)
 		    	{
 			        Attrazioni questa = (Attrazioni) serie.get(i);
@@ -191,8 +193,9 @@
 
                     boolean vicina = vicina(distante, questa.getDistanceEw());
                     boolean orientata = orientata(); //TODO
-			        if(vicina && orientata){
-						Log.i("AVVISO","DENTRO: " + serie.size());
+			        if(true){//just for tests
+					//if(vicina && orientata){
+						//Log.i("AVVISO","DENTRO: " + serie.size());
                         niente=0;
                         gestisciVicinanza(questa, distante);
 			        }

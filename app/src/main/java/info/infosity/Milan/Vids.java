@@ -58,7 +58,7 @@ public class Vids extends Activity {
 		setRitorno();
 		serieDaMostrare = new Vector<Attrazioni>();
 		serieDaMostrare = RouteTracker.getOttenuteserie();
-		//Log.i("seriedim" , "la serie è grandde : " + serieDaMostrare.size());
+		//Log.wtf("serie dimension" , "the series has a length of : " + serieDaMostrare.size());
 		if(serieDaMostrare.size()>0) {
 			int quanti = serieDaMostrare.size();
 			if (quanti > 9) {
@@ -76,6 +76,7 @@ public class Vids extends Activity {
 							@Override
 							public void onClick(View v) {
 								scrivi(attrazioniDaMostrare.get(valore));
+								//Log.wtf("alive", "alive");
 								nomeattrazione = attrazioniDaMostrare.get(valore).getName();
 								numVettoreAttrazione = valore;
 								Intent intent = new Intent(getApplicationContext(), Atr.class);
@@ -188,20 +189,14 @@ public class Vids extends Activity {
 		dbHelper.open();
 		Time now = new Time();
 		now.setToNow();
-		String name = a.getName();
 		String time = now.format2445();
 		a.setVisited("yes");
-		TO TEST
 		dbHelper.updateContact( a.getLatitude(), a.getLongitude(), a.getDistanceNs(), a.getDistanceEw(),a.getLat1(),a.getLong1(),
 			a.getLat2(), a.getLong2(), a.getLat3(), a.getLong3(), a.getLat4(), a.getLong4(), a.getLat5(),
 			a.getLong5(), a.getLat6(), a.getLong6(), a.getLat7(), a.getLong7(), a.getLat8(), a.getLong8(),
 			a.getLat9(), a.getLong9(), a.getLat10(), a.getLong10(), a.getLat11(),a.getLong11(), a.getLat12(),
 			a.getLong12(), a.getName(), a.getType(),a.getCollections(), a.getAddress(), a.getPhone(),
 			a.getOpening(), a.getClosed(), a.getPrice(), a.getGetHere(), a.getDescription(),a.getHistory(),a.getVisited() );
-
-
-		int quanti = dbHelper.fetchAllContactsByObjects().size();
-		Log.e("quanti visitati" , "ho visitato: " + quanti);
 		dbHelper.close();
 	}
 

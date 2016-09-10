@@ -1,7 +1,5 @@
 package info.infosity.Milan.generalDBHelper;
 
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -165,12 +163,25 @@ public class GeneralDbAdapter {
                                String opening, String closed, String price, String getHere, String description,String  history, String visited)
     {
         ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
-        return database.update(DATABASE_TABLE, initialValues, KEY_NAME+"="+name, null);
+        //Log.wtf("name: " , "name: " + KEY_NAME + ";  VALUE = " + name);
+        return database.update(DATABASE_TABLE, initialValues, "name = '" + name + "'", null);
     }
 
     //fetch all contacts
     private Cursor fetchAllContacts() {
         return database.query(DATABASE_TABLE, new String[]{KEY_LATITUDE, KEY_LONGITUDE,KEY_DISTANCESNS,KEY_DISTANCESEW,KEY_LAT1,KEY_LAT2, KEY_LAT3,KEY_LAT4,KEY_LAT5, KEY_LAT6, KEY_LAT7, KEY_LAT8,KEY_LAT9, KEY_LAT10, KEY_LAT11,KEY_LAT12, KEY_LONG1,KEY_LONG2, KEY_LONG3, KEY_LONG4,KEY_LONG5, KEY_LONG6, KEY_LONG7, KEY_LONG8,KEY_LONG9, KEY_LONG10, KEY_LONG11, KEY_LONG12, KEY_NAME, KEY_TYPE, KEY_COLLECTIONS,KEY_ADDRESS, KEY_PHONE, KEY_OPENING, KEY_CLOSED, KEY_PRICE, KEY_GETHERE, KEY_DESCRIPTION,KEY_HISTORY, KEY_VISITED}, null, null, null, null, null);
+    }
+
+    public Vector<String> fetchAllContactsNames()
+    {
+        Vector<String> risp = new Vector<String>();
+        Vector<Attrazioni> toScan = fetchAllContactsByObjects();
+        for(int i=0; i<toScan.size(); i++)
+        {
+            String name = toScan.get(i).getName();
+            risp.add(name);
+        }
+        return risp;
     }
 
     public Vector<Attrazioni> fetchAllContactsByObjects()
@@ -191,7 +202,6 @@ public class GeneralDbAdapter {
                     cursor.getString(28), cursor.getString(29), cursor.getString(30), cursor.getString(31), cursor.getString(32),
                     cursor.getString(33), cursor.getString(34), cursor.getString(35), cursor.getString(36), cursor.getString(37),
                     cursor.getString(38), cursor.getString(39) );
-            
             cursor.moveToPosition(num - 1 - i);
             risp.add(atr);
         }
