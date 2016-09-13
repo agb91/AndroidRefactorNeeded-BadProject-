@@ -16,12 +16,14 @@ import info.infosity.Milan.Attrazioni;
 /**
  * Created by andrea on 23/04/16.
  */
-public class GodOfDb {
+public class GodOfDb extends OftenUsed {
 
     private ImageButton scatto;
     private static Vector<Attrazioni> serie;
     private GeneralDbAdapter dbHelper;
     private Cursor cursor;
+
+
 
     public GodOfDb(Context context)
     {
@@ -30,19 +32,6 @@ public class GodOfDb {
         dbHelper.open();
 
         serie = getSerie(context);
-    }
-
-    private boolean inVector(String needle, Vector<String> haystack)
-    {
-        boolean risp = false;
-        for(int i=0; i<haystack.size(); i++)
-        {
-            if( needle.equalsIgnoreCase ( haystack.get(i) ) )
-            {
-                risp = true;
-            }
-        }
-        return risp;
     }
 
     public Vector<Attrazioni> getSerie(Context context)

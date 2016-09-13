@@ -47,6 +47,7 @@ public class Seen extends Activity {
             {
                 Attrazioni piece = readed.get(i);
                 String pieceName = piece.getName();
+                String pieceType = piece.getType();
                 String visited = piece.getVisited();
                 if( !inVector(pieceName,alreadyInsertedPieces) && visited.equalsIgnoreCase("yes") )
                 {

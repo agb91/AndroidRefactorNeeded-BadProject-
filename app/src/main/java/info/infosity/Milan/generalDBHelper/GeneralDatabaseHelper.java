@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-public class GeneralDatabaseHelper extends SQLiteOpenHelper {
+public class GeneralDatabaseHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "mydatabaseGeberal.db";
     private static final int DATABASE_VERSION = 1;

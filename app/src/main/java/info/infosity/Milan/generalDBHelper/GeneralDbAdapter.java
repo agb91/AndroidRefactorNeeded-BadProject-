@@ -18,7 +18,7 @@ import info.infosity.Milan.Global.Globals;
 import info.infosity.Milan.R;
 import info.infosity.Milan.generalDBHelper.*;
 
-public class GeneralDbAdapter {
+public class GeneralDbAdapter extends OftenUsed {
 
     @SuppressWarnings("unused")
     private static final String LOG_TAG = GeneralDbAdapter.class.getSimpleName();
@@ -150,8 +150,16 @@ public class GeneralDbAdapter {
                                double long12, String name, String type,String  collections, String address, String phone,
                                String opening, String closed, String price, String getHere, String description,String  history, String visited)
     {
-        ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
-        return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
+        Vector<String> existingNames = fetchAllContactsNames();
+        if( !inVector(name,existingNames) )
+        {
+            ContentValues initialValues = createContentValues(latitude, longitude, distanceNs, distanceEw, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, lat6, long6, lat7, long7, lat8, long8, lat9, long9, lat10, long10, lat11, long11, lat12, long12, name, type, collections, address, phone, opening, closed, price, getHere, description, history, visited);
+            return database.insertOrThrow(DATABASE_TABLE, null, initialValues);
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     //modify an attraction
@@ -179,7 +187,38 @@ public class GeneralDbAdapter {
         for(int i=0; i<toScan.size(); i++)
         {
             String name = toScan.get(i).getName();
-            risp.add(name);
+            if( !inVector(name,risp) )
+            {
+                risp.add(name);
+            }
+        }
+        return risp;
+    }
+
+    public Attrazioni getOneAttractionByName(String name)
+    {
+        Vector<Attrazioni> found = fetchAllContactsByObjects();
+        Attrazioni risp = null;
+        for(int i=0; i<found.size(); i++)
+        {
+            if( found.get(i).getName().toLowerCase().contains( name.toLowerCase() ) )
+            {
+                risp = found.get(i);
+            }
+        }
+        return risp;
+    }
+
+    public Attrazioni getOneAttractionByType(String type)
+    {
+        Vector<Attrazioni> found = fetchAllContactsByObjects();
+        Attrazioni risp = null;
+        for(int i=0; i<found.size(); i++)
+        {
+            if( found.get(i).getType().toLowerCase().contains(type.toLowerCase()) )
+            {
+                risp = found.get(i);
+            }
         }
         return risp;
     }
@@ -203,7 +242,10 @@ public class GeneralDbAdapter {
                     cursor.getString(33), cursor.getString(34), cursor.getString(35), cursor.getString(36), cursor.getString(37),
                     cursor.getString(38), cursor.getString(39) );
             cursor.moveToPosition(num - 1 - i);
-            risp.add(atr);
+            if( !inVector(atr,risp) )
+            {
+                risp.add(atr);
+            }
         }
         return risp;
     }

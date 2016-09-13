@@ -38,7 +38,6 @@
 	import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 	import info.infosity.Milan.generalDBHelper.GodOfDb;
 
-
 	public class RouteTracker extends Activity implements SensorEventListener
 	{
 		private float Rot[] = null; //for gravity rotational data
@@ -193,8 +192,8 @@
 
                     boolean vicina = vicina(distante, questa.getDistanceEw());
                     boolean orientata = orientata(); //TODO
-			        if(true){//just for tests
-					//if(vicina && orientata){
+			        //if(true){//just for tests
+					if(vicina && orientata){
 						//Log.i("AVVISO","DENTRO: " + serie.size());
                         niente=0;
                         gestisciVicinanza(questa, distante);
