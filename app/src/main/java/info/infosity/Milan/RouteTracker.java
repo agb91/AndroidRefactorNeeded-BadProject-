@@ -122,22 +122,37 @@
 			scatto.performClick();
 		}
 
-		private double distante (Attrazioni a)
+		private void showDialog(String text)
 		{
-			double risp = 0;
-			double cl =a.getDistanceEw();
-			double clo =a.getLat1();
-			double distanza = a.getDistanceEw();
-			double distLa= Math.abs(l - cl);
-			double distLo= Math.abs(lo - clo);
-			Double tot = distLa + distLo;
-  			return tot;
+			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setTitle("Dialog");
+			alertDialog.setMessage(text);
+			alertDialog.show();
 		}
 
-        private boolean vicina(double vera, double massima)
+		private Distances getDistanceHereToAttraction (Attrazioni a)
+		{
+			double risp = 0;
+			Distances minDist= new Distances(999,999);
+			Coordinate coordinate = new Coordinate( a.getLatitude(), a.getLongitude() );
+			double thisLat = 0;
+			double thisLong = 0;
+			thisLat = coordinate.getLatitude();
+			thisLong = coordinate.getLongitude();
+			double distLa= Math.abs(l - thisLat);
+			double distLo= Math.abs(lo - thisLong);
+			if(distLa<minDist.getNS() && distLo<minDist.getEW())
+			{
+				minDist.setNS(distLa);
+				minDist.setEW(distLo);
+			}
+			return minDist;
+		}
+
+        private boolean vicina(Distances vera, Attrazioni atr)
         {
-			Log.i("dists","VERA : " +vera + ";   MASSIMA: " +  massima);
-            if(vera<massima)
+			//Log.i("dists","VERA : " +vera + ";   MASSIMA: " +  massima);
+            if( vera.getNS() < atr.getDistanceNs() && vera.getEW() < atr.getDistanceEw() )
             {
                 return true;
             }
@@ -152,11 +167,11 @@
 			return ottenuteserie;
 		}
 
-        private void gestisciVicinanza(Attrazioni questa, double distante)
+        private void gestisciVicinanza(Attrazioni questa, Distances distante)
         {
 			//scrivi(questa);
             cont++;
-            questa.setScarto(distante);
+            questa.setScarto( distante.getEW()+distante.getNS() );
 			//Log.wtf("alive", "alive");
             ottenuteserie.add(questa);
 			//Log.i("VICIANNZA", "VICINANZA!!, dim: " + ottenuteserie.size());
@@ -188,9 +203,9 @@
 		    	for(int i=0;i<serie.size();i++)
 		    	{
 			        Attrazioni questa = (Attrazioni) serie.get(i);
-			        double distante = distante(questa);
+			        Distances distante = getDistanceHereToAttraction(questa);
 
-                    boolean vicina = vicina(distante, questa.getDistanceEw());
+                    boolean vicina = vicina(distante, questa);
                     boolean orientata = orientata(); //TODO
 			        //if(true){//just for tests
 					if(vicina && orientata){

@@ -246,6 +246,38 @@ public class Attrazioni extends Activity implements Comparable<Attrazioni> {
 	{
 		return long12;
 	}
+	public Vector<Coordinate> getCoordinates()
+	{
+		Vector<Coordinate> risp = new Vector<Coordinate>();
+
+		Coordinate c1 = new Coordinate( getLat1(), getLong1() );
+		Coordinate c2 = new Coordinate( getLat2(), getLong2() );
+		Coordinate c3 = new Coordinate( getLat3(), getLong3() );
+		Coordinate c4 = new Coordinate( getLat4(), getLong4() );
+		Coordinate c5 = new Coordinate( getLat5(), getLong5() );
+		Coordinate c6 = new Coordinate( getLat6(), getLong6() );
+		Coordinate c7 = new Coordinate( getLat7(), getLong7() );
+		Coordinate c8 = new Coordinate( getLat8(), getLong8() );
+		Coordinate c9 = new Coordinate( getLat9(), getLong9() );
+		Coordinate c10 = new Coordinate( getLat10(), getLong10() );
+		Coordinate c11 = new Coordinate( getLat11(), getLong11() );
+		Coordinate c12 = new Coordinate( getLat12(), getLong12() );
+
+		risp.add(c1);
+		risp.add(c2);
+		risp.add(c3);
+		risp.add(c4);
+		risp.add(c5);
+		risp.add(c6);
+		risp.add(c7);
+		risp.add(c8);
+		risp.add(c9);
+		risp.add(c10);
+		risp.add(c11);
+		risp.add(c12);
+
+		return risp;
+	}
 	public String getVisited() { return visited; }
 	public void setVisited(String s) { visited = s; }
 
