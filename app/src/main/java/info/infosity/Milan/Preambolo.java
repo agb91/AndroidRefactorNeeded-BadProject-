@@ -10,12 +10,14 @@ import android.view.Window;
 import android.content.Context;
 import android.content.*;
 import android.app.AlertDialog;
+
+import info.infosity.Milan.Global.OftenUsed;
 import info.infosity.Milan.SBF.*;
 
 import info.infosity.Milan.Global.Globals;
 
 
-public class Preambolo extends Activity {
+public class Preambolo extends OftenUsed {
 
     ImageButton search;
     ImageButton seen;

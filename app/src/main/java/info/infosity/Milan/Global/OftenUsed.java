@@ -1,4 +1,9 @@
-package info.infosity.Milan.generalDBHelper;
+package info.infosity.Milan.Global;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.view.View;
 
 import java.util.Vector;
 
@@ -7,7 +12,15 @@ import info.infosity.Milan.Attrazioni;
 /**
  * Created by andrea on 13/09/16.
  */
-public class OftenUsed {
+public class OftenUsed extends Activity {
+
+    public void showDialog(Context context, String text)
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Dialog");
+        alertDialog.setMessage(text);
+        alertDialog.show();
+    }
 
     public boolean inVector(String needle, Vector<String> haystack)
     {

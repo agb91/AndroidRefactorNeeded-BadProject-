@@ -2,21 +2,14 @@ package info.infosity.Milan.generalDBHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.Vector;
 
-import info.infosity.Milan.AtrSeen;
 import info.infosity.Milan.Attrazioni;
-import info.infosity.Milan.Global.Globals;
-import info.infosity.Milan.R;
-import info.infosity.Milan.generalDBHelper.*;
+import info.infosity.Milan.Global.OftenUsed;
 
 public class GeneralDbAdapter extends OftenUsed {
 
@@ -218,6 +211,23 @@ public class GeneralDbAdapter extends OftenUsed {
             if( found.get(i).getType().toLowerCase().contains(type.toLowerCase()) )
             {
                 risp = found.get(i);
+            }
+        }
+        return risp;
+    }
+
+    public Vector<Attrazioni> getAllAttractionsByType( String type )
+    {
+        Vector<Attrazioni> allFound = fetchAllContactsByObjects();
+        Vector<Attrazioni> risp = new Vector<Attrazioni>();
+        for(int i=0; i<allFound.size(); i++)
+        {
+            Attrazioni thisAtr = allFound.get( i );
+            String thisAtrName = thisAtr.getType().toLowerCase();
+            type = type.toLowerCase();
+            if( thisAtrName.contains( type ) )
+            {
+                risp.add( thisAtr );
             }
         }
         return risp;

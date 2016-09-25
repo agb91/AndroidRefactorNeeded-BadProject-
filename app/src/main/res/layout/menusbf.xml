@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/what_to_search"
-        android:text="What are you looking for?"
-        android:textSize="30sp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical"
+    android:layout_weight="1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:id="@+id/linsc">
 
-</LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sbf_lin"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- query input editText-->
+        <EditText
+            android:id="@+id/what_to_search"
+            android:text="insert a type (also partial)?"
+            android:textSize="30sp"
+            android:layout_above="@+id/search_button"
+            android:layout_alignLeft="@+id/search_button"
+            android:layout_alignStart="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+        <!-- serach button -->
+        <Button
+            android:id="@+id/search_button"
+            android:text="click to search"
+            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </LinearLayout>
+
+</ScrollView>

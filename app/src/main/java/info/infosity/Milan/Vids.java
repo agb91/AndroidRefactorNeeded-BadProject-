@@ -15,9 +15,10 @@ import android.content.Intent;
 
 import java.util.Vector;
 
+import info.infosity.Milan.Global.OftenUsed;
 import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 
-public class Vids extends Activity {
+public class Vids extends OftenUsed {
 
 	private Button bottone1;
 	private Button bottone2;
@@ -103,8 +104,7 @@ public class Vids extends Activity {
 						}
 					});
 			final AlertDialog alert = builder.create();
-			alert.show();
-		}
+			alert.show();		}
 	}
 
 	public Vector<Attrazioni> getAttrazioniDaMostrare()

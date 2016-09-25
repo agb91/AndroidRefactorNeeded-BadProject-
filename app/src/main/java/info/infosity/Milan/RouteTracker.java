@@ -34,11 +34,12 @@
 	import android.widget.*;
 
 	import info.infosity.Milan.Global.Globals;
+	import info.infosity.Milan.Global.OftenUsed;
 	import info.infosity.Milan.generalDBHelper.GeneralDatabaseHelper;
 	import info.infosity.Milan.generalDBHelper.GeneralDbAdapter;
 	import info.infosity.Milan.generalDBHelper.GodOfDb;
 
-	public class RouteTracker extends Activity implements SensorEventListener
+	public class RouteTracker extends OftenUsed implements SensorEventListener
 	{
 		private float Rot[] = null; //for gravity rotational data
 		//don't use R because android uses that for other stuff
@@ -122,13 +123,6 @@
 			scatto.performClick();
 		}
 
-		private void showDialog(String text)
-		{
-			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-			alertDialog.setTitle("Dialog");
-			alertDialog.setMessage(text);
-			alertDialog.show();
-		}
 
 		private Distances getDistanceHereToAttraction (Attrazioni a)
 		{

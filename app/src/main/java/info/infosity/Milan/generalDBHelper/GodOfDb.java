@@ -1,17 +1,13 @@
 package info.infosity.Milan.generalDBHelper;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import java.util.Vector;
 
 import info.infosity.Milan.Attrazioni;
+import info.infosity.Milan.Global.OftenUsed;
 
 /**
  * Created by andrea on 23/04/16.
@@ -30,6 +26,12 @@ public class GodOfDb extends OftenUsed {
         dbHelper.open();
 
         serie = getSerie(context);
+    }
+
+    public Vector<Attrazioni> getSerieByType( Context context , String needle )
+    {
+        Vector<Attrazioni> atrs= dbHelper.getAllAttractionsByType( needle );
+        return atrs;
     }
 
     public Vector<Attrazioni> getSerie(Context context)
