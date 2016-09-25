@@ -6,37 +6,40 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.location.LocationManager;
-import java.util.Vector;
 import android.view.Window;
 import android.content.Context;
 import android.content.*;
 import android.app.AlertDialog;
+import info.infosity.Milan.SBF.*;
 
 import info.infosity.Milan.Global.Globals;
-import info.infosity.Milan.generalDBHelper.GodOfDb;
 
 
 public class Preambolo extends Activity {
 
     ImageButton search;
     ImageButton seen;
+    ImageButton searchByField;
     ImageButton info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.menu20);
+        setContentView(R.layout.preambolo);
         Globals.create(this);
 
-        search = (ImageButton) findViewById(R.id.imageButton2);
-        search.setOnClickListener(cliccasearch);
+        search = (ImageButton) findViewById(R.id.search);
+        search.setOnClickListener(clickSearch);
 
-        seen = (ImageButton) findViewById(R.id.imageButton);
-        seen.setOnClickListener(cliccaseen);
+        seen = (ImageButton) findViewById(R.id.attractions_seen);
+        seen.setOnClickListener(clickSeen);
+
+        searchByField = (ImageButton) findViewById(R.id.search_by_field);
+        searchByField.setOnClickListener(clickSBF);
 
         info = (ImageButton) findViewById(R.id.bottoneinfo);
-        info.setOnClickListener(cliccainfo);
+        info.setOnClickListener(clickInfo);
 
         final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
@@ -66,7 +69,7 @@ public class Preambolo extends Activity {
         alert.show();
     }
 
-    private View.OnClickListener cliccasearch = new View.OnClickListener()
+    private View.OnClickListener clickSearch = new View.OnClickListener()
     {
         @Override
         public void onClick(View v) {
@@ -86,7 +89,7 @@ public class Preambolo extends Activity {
         }
     };
 
-    private View.OnClickListener cliccainfo = new View.OnClickListener()
+    private View.OnClickListener clickInfo = new View.OnClickListener()
     {
         @Override
         public void onClick(View v) {
@@ -95,11 +98,20 @@ public class Preambolo extends Activity {
         }
     };
 
-    private View.OnClickListener cliccaseen = new View.OnClickListener()
+    private View.OnClickListener clickSeen = new View.OnClickListener()
     {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), Seen.class);
+            startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener clickSBF = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), SearchByField.class);
             startActivity(intent);
         }
     };

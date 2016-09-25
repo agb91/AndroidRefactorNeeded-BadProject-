@@ -26,6 +26,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="info.infosity.Milan.SBF.SearchByField"
+            android:label="Infosity: SearchByField" >
+        </activity>
+        <activity
             android:name="info.infosity.Milan.Info"
             android:label="@string/app_name" >
         </activity>
