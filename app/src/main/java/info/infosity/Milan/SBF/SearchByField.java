@@ -28,7 +28,7 @@ import info.infosity.Milan.generalDBHelper.GodOfDb;
 
 public class SearchByField extends OftenUsed {
 
-    private EditText query;
+    private EditText queryText;
     private Button queryButton;
 
     private String readQuery = "";
@@ -46,8 +46,8 @@ public class SearchByField extends OftenUsed {
         linearLayout = (LinearLayout) findViewById(R.id.sbf_lin);
         thisContext = this;
 
-        query = ( EditText ) findViewById( R.id.what_to_search );
-
+        queryText = ( EditText ) findViewById( R.id.what_to_search );
+        queryText.setOnClickListener( clickInsertTextToSearch );
         queryButton = ( Button ) findViewById( R.id.search_button );
         queryButton.setOnClickListener( clickSearch );
     }
@@ -56,16 +56,46 @@ public class SearchByField extends OftenUsed {
     {
         @Override
         public void onClick( View v ) {
-            String readQuery = String.valueOf( query.getText() );
+            queryButton.setVisibility( View.GONE );
+            String readQuery = String.valueOf( queryText.getText() );
             //showDialog(thisContext, readQuery);
+            deleteAllButtons();
             Vector<Attrazioni> matchingAttractions = getAttractionsByField(readQuery);
             createAllButtons( matchingAttractions );
         }
     };
 
-    private void createAllButtons( Vector<Attrazioni> mA )
+    private View.OnClickListener clickInsertTextToSearch = new View.OnClickListener()
     {
-        for( int i = 0 ; i < mA.size() ; i++ )
+        @Override
+        public void onClick( View v ) {
+            deleteAllButtons();
+            queryButton.setVisibility( View.VISIBLE );
+           }
+    };
+
+    private void deleteAllButtons()
+    {
+        for( int i = 0 ; i < 12 ; i++ )
+        {
+            Button btn = ( Button ) findViewById( i );
+            try{
+                ( ( LinearLayout ) btn.getParent() ).removeView( btn );
+            }catch (Exception e)
+            {
+                Log.wtf( "curse" , "curse" );
+            }
+        }
+    }
+
+    private void createAllButtons( Vector<Attrazioni> mA )
+    {   //I don't wanna more then 12 results! it is a little screen!!!
+        int maxShown = mA.size();
+        if ( maxShown > 12 )
+        {
+            maxShown = 12;
+        }
+        for( int i = 0 ; i < maxShown ; i++ )
         {
             Button btn = new Button( this );
             btn.setId( i );
